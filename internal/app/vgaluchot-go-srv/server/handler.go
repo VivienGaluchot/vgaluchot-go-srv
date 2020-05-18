@@ -11,11 +11,15 @@ import (
 	"github.com/VivienGaluchot/vgaluchot-go-srv/internal/app/vgaluchot-go-srv/websocket"
 )
 
+func templateDir() string {
+	return filepath.Join(os.Getenv("WEB_DIR"), "template")
+}
+
 var (
 	templates = template.Must(
 		template.ParseFiles(
-			filepath.Join(os.Getenv("WEB_DIR"), "template", "index.html"),
-			filepath.Join(os.Getenv("WEB_DIR"), "template", "chat.html")),
+			filepath.Join(templateDir(), "index.html"),
+			filepath.Join(templateDir(), "chat.html")),
 	)
 )
 
@@ -53,11 +57,11 @@ func makeTemplateHandler(url string, templateName string) func(w http.ResponseWr
 		}
 
 		type indexData struct {
-			Style       string
+			Static      string
 			RequestTime string
 		}
 		data := indexData{
-			Style:       "/static/style.css",
+			Static:      "/static",
 			RequestTime: time.Now().Format(time.RFC822),
 		}
 		if err := templates.ExecuteTemplate(w, templateName, data); err != nil {

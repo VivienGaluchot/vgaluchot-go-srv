@@ -21,6 +21,5 @@ func main() {
 	}
 
 	server.Serve(port, serveStatic)
-
 	log.Fatalln("server.Serve terminated")
 }

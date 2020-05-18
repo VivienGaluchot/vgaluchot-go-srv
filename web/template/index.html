@@ -2,14 +2,37 @@
 <html>
 
 <head>
-    <title>Default</title>
-    <link rel="stylesheet" type="text/css" href="{{.Style}}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pplane.js</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+        integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="{{.Static}}/style.css">
 </head>
 
 <body>
-    <h1>Default</h1>
-    <p>Current time is: {{.RequestTime}}</p>
-    <a href="/chat">multichat link</a>
+    <h1><i class="far fa-paper-plane"></i> pplane.js</h1>
+
+    <div id="conv" class="conv">
+        <div class="message me">
+            <span class="pair">me</span>
+            <span class="timestamp">now</span>
+            <span class="data">Dummy</span>
+        </div>
+        <div class="message other">
+            <span class="pair">other</span>
+            <span class="timestamp">now</span>
+            <span class="data">Dummy</span>
+        </div>
+    </div>
+
+    <form class="typeform" id="sendform">
+        <textarea class="typearea" type="text" id="msg" size="2" autofocus></textarea>
+        <button class="typesubmit" type="submit"><i class="fas fa-paper-plane"></i></button>
+    </form>
+
+    <script type="text/javascript" src="{{.Static}}/pplane.js"></script>
+    <script type="text/javascript" src="{{.Static}}/app.js"></script>
 </body>
 
 </html>

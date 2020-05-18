@@ -1,4 +1,97 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body>* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
+    background-color: linen;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    height: calc(100% - 2rem);
+}
+
+.conv {
+    flex-grow: 1;
+    width: 100%;
+    border: 1px solid rgb(216, 163, 109);
+    background-color: white;
+    box-sizing: border-box;
+    padding: .4rem;
+    border-radius: .2rem;
+    overflow: auto;
+}
+
+.message {
+    font-size: .8rem;
+    display: block;
+    padding: .4rem;
+    box-sizing: border-box;
+    color: rgba(95, 49, 2, 0.486);
+}
+
+.message .pair {
+    font-weight: bold;
+}
+
+.message>.data {
+    font-size: 1.2rem;
+    display: block;
+    color: #000;
+}
+
+.message.me {
+    text-align: right;
+}
+
+.typeform {
+    width: calc(100% + 1rem);
+    display: flex;
+    margin: .5rem -.5rem;
+}
+
+.typearea, .typesubmit {
+    margin: .5rem;
+}
+
+.typearea {
+    flex-grow: 1;
+    align-items: flex-start;
+    border: 1px solid rgb(216, 163, 109);
+    color: rgb(95, 49, 2);
+    border-radius: .2rem;
+    padding: .2rem;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+}
+
+.typesubmit {
+    border: 2px solid rgb(95, 49, 2);
+    border-radius: .2rem;
+    font-size: 1rem;
+    max-height: 2rem;
+    color: rgb(216, 163, 109);
+    background-color: rgb(95, 49, 2);
+}
+
+.typesubmit:hover {
+    color: rgb(95, 49, 2);
+    background-color: rgb(216, 163, 109);
+}
+
+.typesubmit:focus {
+    box-shadow: 0 0 0 .2rem rgba(95, 49, 2, .3);
+}
+
+.typesubmit:active {
+    box-shadow: 0 0 0 .3rem rgba(95, 49, 2, .3);
 }

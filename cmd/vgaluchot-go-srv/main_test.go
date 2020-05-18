@@ -4,5 +4,5 @@ import (
 	"testing"
 )
 
-// Empty test function, check the working package initialization
+// Empty test function, verify the minimal process initialization
 func TestMain(t *testing.T) {}
