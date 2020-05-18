@@ -11,7 +11,9 @@ build:
 	go build -v -o $(TMP)/vgaluchot-go-srv ./cmd/vgaluchot-go-srv
 
 test:
-	go test -v ./cmd/vgaluchot-go-srv
+	@export WEB_DIR="../../web" ; go test -v ./cmd/vgaluchot-go-srv
+	@export WEB_DIR="../../web" ; go test -v ./deployments/gae
+	@export WEB_DIR="../../../../web" ; go test -v ./internal/app/vgaluchot-go-srv/server
 
 run: build
 	cd web ; ../$(TMP)/vgaluchot-go-srv

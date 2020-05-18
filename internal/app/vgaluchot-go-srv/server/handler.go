@@ -3,6 +3,7 @@ package server
 import (
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
 	"text/template"
 	"time"
@@ -10,7 +11,7 @@ import (
 
 var (
 	indexTmpl = template.Must(
-		template.ParseFiles(filepath.Join("template", "index.html")),
+		template.ParseFiles(filepath.Join(os.Getenv("WEB_DIR"), "template", "index.html")),
 	)
 )
 

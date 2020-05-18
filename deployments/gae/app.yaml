@@ -4,6 +4,9 @@ automatic_scaling:
   target_cpu_utilization: 0.80
   max_instances: 5
 
+env_variables:
+  WEB_DIR: "."
+
 handlers:
 # Configure App Engine to serve any static assets.
 - url: /static
