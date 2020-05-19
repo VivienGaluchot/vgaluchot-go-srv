@@ -39,21 +39,21 @@ function messageToDiv(msg, div) {
     return div;
 }
 
-let msg = document.getElementById("msg");
-let convEl = document.getElementById("conv");
-let convStateEl = document.getElementById("conv-state");
+let msgEl = document.getElementById("i-msg");
+let chanEl = document.getElementById("i-chan");
+let convEl = document.getElementById("o-conv");
+let convStateEl = document.getElementById("o-conv-state");
 
-msg.onkeyup = function (event) {
+msgEl.onkeypress = function (event) {
     if (event.keyCode == 13) {
         if (event.shiftKey) {
-            // new line
+            msgEl.value = msgEl.value + "\n";
         } else {
-            msg.value = msg.value.substring(0, msg.value.length - 1);
             document.getElementById("sendform").onsubmit();
         }
         return false;
     }
-}
+};
 
 let pplaneConv = new pplane.Conv();
 pplaneConv.onMessage = function (msg) {
@@ -87,10 +87,10 @@ pplaneConv.onStateChange = function (conv) {
 pplaneConv.connect();
 
 document.getElementById("sendform").onsubmit = function () {
-    if (!msg.value) {
+    if (!msgEl.value) {
         return false;
     }
-    pplaneConv.send(msg.value);
-    msg.value = "";
+    pplaneConv.send(msgEl.value);
+    msgEl.value = "";
     return false;
 };

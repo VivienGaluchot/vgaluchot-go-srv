@@ -20,13 +20,47 @@ body {
     height: calc(100% - 2rem);
 }
 
+header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+}
+
+header h1 {
+    flex-grow: 1;
+    margin: 0;
+}
+
+.typechanlabel {
+    color: rgb(216, 163, 109, .5);
+    font-size: 1.2rem;
+}
+
+.typechan {
+    background-color: transparent;
+    border: 1px solid rgb(216, 163, 109);
+    color: rgb(216, 163, 109);
+    border-radius: .2rem;
+    padding: .2rem;
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif;
+}
+
+.typechan::before {
+    content: "#";
+    display: inline-block;
+}
+
 .conv-state {
+    text-align: right;
     font-size: .8rem;
     color: rgb(216, 163, 109);
 }
 
-.conv-state.ok {
-    color: rgb(64, 172, 69);
+.conv-state:not(.ok) {
+    color: rgb(216, 0, 0);
+    font-weight: bold;
 }
 
 .conv {

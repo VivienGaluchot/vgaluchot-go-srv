@@ -2,6 +2,7 @@ package pplane
 
 import (
 	"bytes"
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -47,9 +48,11 @@ type Client struct {
 // ensures that there is at most one reader on a connection by executing all
 // reads from this goroutine.
 func (c *Client) readPump() {
+	fmt.Printf("CLIENT : %s connected\n", c.conn.RemoteAddr())
 	defer func() {
 		c.hub.unregister <- c
 		c.conn.Close()
+		fmt.Printf("CLIENT : %s disconnected\n", c.conn.RemoteAddr())
 	}()
 	c.conn.SetReadLimit(maxMessageSize)
 	c.conn.SetReadDeadline(time.Now().Add(pongWait))
@@ -63,8 +66,6 @@ func (c *Client) readPump() {
 			break
 		}
 		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
-		// add date
-		message = append([]byte(time.Now().Format(time.RFC822)+" : "), message...)
 		c.hub.broadcast <- message
 	}
 }

@@ -11,11 +11,16 @@
 </head>
 
 <body>
-    <h1><i class="far fa-paper-plane"></i> pplane</h1>
+    <header>
+        <h1><i class="far fa-paper-plane"></i> pplane</h1>
+        <div>
+            <label class="typechanlabel">chan</label>
+            <input class="typechan" type="text" id="i-chan">
+        </div>
+    </header>
 
-    <div id="conv-state" class="conv-state"></div>
-
-    <div id="conv" class="conv">
+    <div id="o-conv-state" class="conv-state"></div>
+    <div id="o-conv" class="conv">
         <div class="message me">
             <span class="pair">me</span>
             <span class="timestamp">now</span>
@@ -29,7 +34,7 @@
     </div>
 
     <form class="typeform" id="sendform">
-        <textarea class="typearea" type="text" id="msg" size="2" autofocus></textarea>
+        <textarea class="typearea" type="text" id="i-msg" size="2" autofocus></textarea>
         <button class="typesubmit" type="submit"><i class="fas fa-paper-plane"></i></button>
     </form>
 

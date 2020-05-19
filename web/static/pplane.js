@@ -51,8 +51,6 @@ const pplane = function () {
             socket.onerror = function (error) {
                 selfConv.setState(CON_STATE_NONE);
                 console.error(error);
-                console.log("websocket connection failed, retry in a few seconds");
-                setTimeout(() => { selfConv.connect(); }, 3000);
             };
             socket.onclose = function (evt) {
                 selfConv.setState(CON_STATE_NONE);
@@ -83,8 +81,9 @@ const pplane = function () {
 
         setState(state) {
             assert(state == CON_STATE_NONE || state == CON_STATE_CONNECTED_TO_SERVER || state == CON_STATE_CONNECTED_TO_PAIR);
+            let changed = this.state != state;
             this.state = state;
-            if (this.onStateChange) {
+            if (changed && this.onStateChange) {
                 this.onStateChange(this);
             }
         }
@@ -117,9 +116,9 @@ const pplane = function () {
 
         setState(state) {
             assert(state == MSG_STATE_LOCAL || state == MSG_STATE_SENT_TO_SRV || state == MSG_STATE_SENT_TO_PAIR || state == MSG_STATE_READ_BY_PAIR);
+            let changed = this.state != state;
             this.state = state;
-
-            if (this.onChange) {
+            if (changed && this.onChange) {
                 this.onChange(this);
             }
         }
