@@ -20,6 +20,15 @@ body {
     height: calc(100% - 2rem);
 }
 
+.conv-state {
+    font-size: .8rem;
+    color: rgb(216, 163, 109);
+}
+
+.conv-state.ok {
+    color: rgb(64, 172, 69);
+}
+
 .conv {
     flex-grow: 1;
     width: 100%;

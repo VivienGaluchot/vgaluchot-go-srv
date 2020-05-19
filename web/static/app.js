@@ -1,5 +1,3 @@
-let pplaneConv = new pplane.Conv();
-
 function messageToDiv(msg, div) {
     div.innerHTML = "";
     div.classList.add("message");
@@ -13,16 +11,16 @@ function messageToDiv(msg, div) {
     data.innerText = msg.data;
     var state = document.createElement("span");
     state.classList.add("state");
-    if (msg.state == pplane.STATE_LOCAL) {
+    if (msg.state == pplane.MSG_STATE_LOCAL) {
         state.innerText = "local";
-    } else if (msg.state == pplane.STATE_SENT_TO_SRV) {
+    } else if (msg.state == pplane.MSG_STATE_SENT_TO_SRV) {
         state.innerText = "sent to server";
-    } else if (msg.state == pplane.STATE_SENT_TO_PAIR) {
+    } else if (msg.state == pplane.MSG_STATE_SENT_TO_PAIR) {
         state.innerText = "sent to pair";
-    } else if (msg.state == pplane.STATE_READ_BY_PAIR) {
+    } else if (msg.state == pplane.MSG_STATE_READ_BY_PAIR) {
         state.innerText = "read";
     } else {
-        state.innerText = "?";
+        convStateEl.innerText = `? ${msg.state}`;
     }
 
     if (msg.src_pair == pplane.PAIR_ME) {
@@ -43,6 +41,7 @@ function messageToDiv(msg, div) {
 
 let msg = document.getElementById("msg");
 let convEl = document.getElementById("conv");
+let convStateEl = document.getElementById("conv-state");
 
 msg.onkeyup = function (event) {
     if (event.keyCode == 13) {
@@ -56,22 +55,36 @@ msg.onkeyup = function (event) {
     }
 }
 
+let pplaneConv = new pplane.Conv();
 pplaneConv.onMessage = function (msg) {
     console.log("onMessage", msg);
-
     var div = document.createElement("div");
     messageToDiv(msg, div);
-
     var doScroll = convEl.scrollTop > convEl.scrollHeight - convEl.clientHeight - 1;
     convEl.appendChild(div);
     if (doScroll) {
         convEl.scrollTop = convEl.scrollHeight - convEl.clientHeight;
     }
-
     msg.onChange = function (msg) {
         messageToDiv(msg, div);
+    };
+};
+pplaneConv.onStateChange = function (conv) {
+    if (conv.state == pplane.CON_STATE_NONE) {
+        convStateEl.classList.remove("ok");
+        convStateEl.innerText = "no connection";
+    } else if (conv.state == pplane.CON_STATE_CONNECTED_TO_SERVER) {
+        convStateEl.classList.add("ok");
+        convStateEl.innerText = "connected to server";
+    } else if (conv.state == pplane.CON_STATE_CONNECTED_TO_PAIR) {
+        convStateEl.classList.add("ok");
+        convStateEl.innerText = "connected to pair";
+    } else {
+        convStateEl.classList.remove("ok");
+        convStateEl.innerText = `? ${conv.state}`;
     }
 };
+pplaneConv.connect();
 
 document.getElementById("sendform").onsubmit = function () {
     if (!msg.value) {

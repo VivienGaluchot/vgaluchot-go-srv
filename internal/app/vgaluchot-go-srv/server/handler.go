@@ -8,7 +8,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/VivienGaluchot/vgaluchot-go-srv/internal/app/vgaluchot-go-srv/websocket"
+	"github.com/VivienGaluchot/vgaluchot-go-srv/internal/app/vgaluchot-go-srv/pplane"
 )
 
 func templateDir() string {
@@ -42,7 +42,7 @@ func installHandlers(mux *http.ServeMux, serveStatics bool) {
 		mux.Handle("/static/", staticHandler)
 	}
 
-	websocket.InstallHandlers(mux)
+	pplane.InstallHandlers(mux)
 }
 
 func makeTemplateHandler(url string, templateName string) func(w http.ResponseWriter, r *http.Request) {
