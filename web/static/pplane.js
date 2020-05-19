@@ -26,6 +26,8 @@ const pplane = function () {
             this.local_ctr = 0;
             // connection state
             this.state = CON_STATE_NONE;
+            // connection socket
+            this.socket = null;
 
             // callback, void (Message)
             this.onMessage = null;
@@ -35,37 +37,29 @@ const pplane = function () {
         }
 
         connect() {
-            // TODO connect or wait pair through websocket
-            // sync history with pair when successfull
-            let socket = null;
+            // TODO sync history with server when successfull
             try {
-                socket = new WebSocket("ws://" + document.location.host + "/ws");
+                this.socket = new WebSocket("ws://" + document.location.host + "/ws");
             } catch (exception) {
                 console.error(exception);
             }
 
             let selfConv = this;
-            socket.onopen = function (event) {
+            this.socket.onopen = function (event) {
                 selfConv.setState(CON_STATE_CONNECTED_TO_SERVER);
             };
-            socket.onerror = function (error) {
+            this.socket.onerror = function (error) {
                 selfConv.setState(CON_STATE_NONE);
                 console.error(error);
             };
-            socket.onclose = function (evt) {
+            this.socket.onclose = function (evt) {
                 selfConv.setState(CON_STATE_NONE);
                 console.log("websocket connection closed, retry in a few seconds");
                 setTimeout(() => { selfConv.connect(); }, 3000);
             };
-
-            socket.onmessage = function (evt) {
-                console.log("incomming data", evt.data);
-                let messages = evt.data.split('\n');
-                for (let i = 0; i < messages.length; i++) {
-                    let item = document.createElement("div");
-                    item.innerText = messages[i];
-                    appendLog(item);
-                }
+            this.socket.onmessage = function (evt) {
+                let obj = JSON.parse(evt.data);
+                console.log("incomming data", obj);
             };
         }
 
@@ -73,7 +67,10 @@ const pplane = function () {
             this.local_ctr += 1;
             let message = new Message(PAIR_ME, MSG_STATE_LOCAL, msg, new Date(), this.local_ctr);
             this.history.addMessage(message);
-            // TODO sync history with pair
+
+            // TODO update state once the server callback is received
+            this.socket.send(message.serialize());
+
             if (this.onMessage) {
                 this.onMessage(message);
             }
@@ -121,6 +118,11 @@ const pplane = function () {
             if (changed && this.onChange) {
                 this.onChange(this);
             }
+        }
+
+        serialize() {
+            let obj = { data: this.data, timestamp: this.timestamp, counter: this.counter };
+            return JSON.stringify(obj);
         }
     };
 

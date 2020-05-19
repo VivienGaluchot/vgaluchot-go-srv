@@ -1,6 +1,6 @@
 package pplane
 
-import "fmt"
+import "log"
 
 // Hub maintains the set of active clients and broadcasts messages to the
 // clients.
@@ -31,10 +31,10 @@ func (h *Hub) run() {
 	for {
 		select {
 		case client := <-h.register:
-			fmt.Printf("HUB : %s registered\n", client.conn.RemoteAddr())
+			log.Printf("HUB : %s registered\n", client.conn.RemoteAddr())
 			h.clients[client] = true
 		case client := <-h.unregister:
-			fmt.Printf("HUB : %s unregistered\n", client.conn.RemoteAddr())
+			log.Printf("HUB : %s unregistered\n", client.conn.RemoteAddr())
 			if _, ok := h.clients[client]; ok {
 				delete(h.clients, client)
 				close(client.send)

@@ -1,8 +1,7 @@
 package pplane
 
 import (
-	"bytes"
-	"fmt"
+	"encoding/json"
 	"log"
 	"net/http"
 	"time"
@@ -42,31 +41,67 @@ type Client struct {
 	send chan []byte
 }
 
-// readPump pumps messages from the websocket connection to the hub.
+func handleIncommingMessage(c *Client, raw []byte) {
+	log.Printf("CLIENT : %s -> '%s'\n", c.conn.RemoteAddr(), raw)
+
+	// decode message
+	type IncommingMessage struct {
+		data      string
+		timestamp string
+		counter   int64
+	}
+	var message IncommingMessage
+	if err := json.Unmarshal(raw, &message); err != nil {
+		log.Printf("unmarshal error with input '%s'\n", raw)
+		return
+	}
+
+	// send server ack
+	type StateUpdateMessage struct {
+		counter int64
+		state   int64
+	}
+	ackMessage := StateUpdateMessage{counter: message.counter, state: 1}
+	var ackBytes, err = json.Marshal(ackMessage)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// TODO fix bug here
+	log.Println(ackMessage)
+	c.send <- ackBytes
+
+	// broadcast
+	if c.hub != nil {
+		c.hub.broadcast <- raw
+	}
+}
+
+// readPump pumps messages from the websocket connection to the handleIncommingMessage.
 //
 // The application runs readPump in a per-connection goroutine. The application
 // ensures that there is at most one reader on a connection by executing all
 // reads from this goroutine.
 func (c *Client) readPump() {
-	fmt.Printf("CLIENT : %s connected\n", c.conn.RemoteAddr())
+	log.Printf("CLIENT : %s connected\n", c.conn.RemoteAddr())
 	defer func() {
-		c.hub.unregister <- c
+		if c.hub != nil {
+			c.hub.unregister <- c
+		}
 		c.conn.Close()
-		fmt.Printf("CLIENT : %s disconnected\n", c.conn.RemoteAddr())
+		log.Printf("CLIENT : %s disconnected\n", c.conn.RemoteAddr())
 	}()
 	c.conn.SetReadLimit(maxMessageSize)
 	c.conn.SetReadDeadline(time.Now().Add(pongWait))
 	c.conn.SetPongHandler(func(string) error { c.conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
-		_, message, err := c.conn.ReadMessage()
+		_, rawMessage, err := c.conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Printf("error: %v", err)
 			}
 			break
 		}
-		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
-		c.hub.broadcast <- message
+		handleIncommingMessage(c, rawMessage)
 	}
 }
 
@@ -95,14 +130,15 @@ func (c *Client) writePump() {
 			if err != nil {
 				return
 			}
+			log.Printf("CLIENT : %s <- '%s'\n", c.conn.RemoteAddr(), message)
 			w.Write(message)
 
 			// Add queued chat messages to the current websocket message.
-			n := len(c.send)
-			for i := 0; i < n; i++ {
-				w.Write(newline)
-				w.Write(<-c.send)
-			}
+			// n := len(c.send)
+			// for i := 0; i < n; i++ {
+			// 	w.Write(newline)
+			// 	w.Write(<-c.send)
+			// }
 
 			if err := w.Close(); err != nil {
 				return
@@ -124,8 +160,8 @@ func serveWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}
-	client.hub.register <- client
+	client := &Client{hub: nil, conn: conn, send: make(chan []byte, 256)}
+	// client.hub.register <- client
 
 	// Allow collection of memory referenced by the caller by doing all work in
 	// new goroutines.
