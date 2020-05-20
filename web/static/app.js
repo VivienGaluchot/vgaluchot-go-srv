@@ -22,7 +22,7 @@ function messageToDiv(msg, div) {
     } else if (msg.state == pplane.MSG_STATE_READ_BY_PAIR) {
         state.innerText = "read";
     } else {
-        convStateEl.innerText = `? ${msg.state}`;
+        convStateEl.innerText = "";
     }
 
     if (msg.uid == pplaneConv.localUid) {
@@ -57,19 +57,6 @@ msgEl.onkeypress = function (event) {
     }
 };
 
-pplaneConv.onMessage = function (msg) {
-    console.log("onMessage", msg);
-    var div = document.createElement("div");
-    messageToDiv(msg, div);
-    var doScroll = convEl.scrollTop > convEl.scrollHeight - convEl.clientHeight - 1;
-    convEl.appendChild(div);
-    if (doScroll) {
-        convEl.scrollTop = convEl.scrollHeight - convEl.clientHeight;
-    }
-    msg.onChange = function (msg) {
-        messageToDiv(msg, div);
-    };
-};
 pplaneConv.onStateChange = function (conv) {
     if (conv.state == pplane.CON_STATE_NONE) {
         convStateEl.classList.remove("ok");
@@ -85,6 +72,18 @@ pplaneConv.onStateChange = function (conv) {
         convStateEl.innerText = `? ${conv.state}`;
     }
 };
+pplaneConv.history.onMessage = function (msg) {
+    var div = document.createElement("div");
+    messageToDiv(msg, div);
+    var doScroll = convEl.scrollTop > convEl.scrollHeight - convEl.clientHeight - 1;
+    convEl.appendChild(div);
+    if (doScroll) {
+        convEl.scrollTop = convEl.scrollHeight - convEl.clientHeight;
+    }
+    msg.onChange = function (msg) {
+        messageToDiv(msg, div);
+    };
+};
 pplaneConv.connect();
 
 document.getElementById("sendform").onsubmit = function () {
@@ -95,3 +94,8 @@ document.getElementById("sendform").onsubmit = function () {
     msgEl.value = "";
     return false;
 };
+
+document.addEventListener("DOMContentLoaded", function (evt) {
+    chanEl.value = pplaneConv.cid;
+    console.log(chanEl);
+});

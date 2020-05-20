@@ -3,6 +3,7 @@ const pplane = function () {
     const MSG_STATE_SENT_TO_SRV = 1;
     const MSG_STATE_SENT_TO_PAIR = 2;
     const MSG_STATE_READ_BY_PAIR = 3;
+    const MSG_STATE_REMOTE = 4;
 
     const CON_STATE_NONE = 0;
     const CON_STATE_CONNECTED_TO_SERVER = 1;
@@ -28,9 +29,9 @@ const pplane = function () {
         constructor() {
             // TODO fetch items from local storage
             // conversation id
-            this.cid = makeUid(16);
+            this.cid = 0;
             // local user id
-            this.localUid = makeUid(16);
+            this.localUid = makeUid(32);
             // send counter
             this.localCtr = 0;
             // history of messages
@@ -40,9 +41,6 @@ const pplane = function () {
             this.state = CON_STATE_NONE;
             // connection socket
             this.socket = null;
-
-            // callback, void (Message)
-            this.onMessage = null;
 
             // callback, void (Conv)
             this.onStateChange = null;
@@ -77,14 +75,15 @@ const pplane = function () {
                 setTimeout(() => { selfConv.connect(); }, 3000);
             };
             this.socket.onmessage = function (evt) {
-                let obj = JSON.parse(evt.data);
-                console.log("incomming data", obj);
-
-                try {
-                    selfConv.history.getMessage(obj.uid, obj.counter).setState(obj.state);
-                } catch (exception) {
-                    console.error(exception);
+                const dateFormat = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\S+Z$/;
+                function reviver(key, value) {
+                    if (typeof value === "string" && dateFormat.test(value)) {
+                        return new Date(value);
+                    }
+                    return value;
                 }
+                let obj = JSON.parse(evt.data, reviver);
+                selfConv.history.handleServerData(obj);
             };
         }
 
@@ -97,18 +96,13 @@ const pplane = function () {
             } catch (exception) {
                 console.error(exception);
             }
-            if (this.onMessage) {
-                this.onMessage(message);
-            }
         }
 
         setState(state) {
             assert(state == CON_STATE_NONE || state == CON_STATE_CONNECTED_TO_SERVER || state == CON_STATE_CONNECTED_TO_PAIR);
-            if (this.state < state) {
-                this.state = state;
-                if (this.onStateChange) {
-                    this.onStateChange(this);
-                }
+            this.state = state;
+            if (this.onStateChange) {
+                this.onStateChange(this);
             }
         }
     };
@@ -117,11 +111,27 @@ const pplane = function () {
         constructor() {
             // map : (uid, counter) -> Message
             this.msgMap = new Map();
+
+            // callback, void (Message)
+            this.onMessage = null;
         }
 
-        getMessage(uid, counter) {
-            let key = (uid, counter);
-            return this.msgMap.get(key);
+        handleServerData(obj) {
+            if ('uid' in obj && 'counter' in obj) {
+                let key = `${obj.uid}-${obj.counter}`;
+                if (this.msgMap.has(key)) {
+                    this.msgMap.get(key).handleServerData(obj);
+                } else {
+                    if ('data' in obj && 'timestamp' in obj) {
+                        let msg = new Message(obj.uid, null, obj.data, obj.timestamp, obj.counter);
+                        this.addMessage(msg);
+                    } else {
+                        console.warn("unexpected obj", obj);
+                    }
+                }
+            } else {
+                console.warn("unexpected obj", obj);
+            }
         }
 
         // callback : void (Message)
@@ -135,11 +145,14 @@ const pplane = function () {
 
         addMessage(msg) {
             assert(msg instanceof Message);
-            let key = (msg.uid, msg.counter);
+            let key = `${msg.uid}-${msg.counter}`;
             if (!this.msgMap.has(key)) {
                 this.msgMap.set(key, msg);
             } else {
                 console.error("existing message", key)
+            }
+            if (this.onMessage) {
+                this.onMessage(msg);
             }
         }
     };
@@ -147,7 +160,7 @@ const pplane = function () {
     class Message {
         constructor(uid, state, data, timestamp, counter) {
             this.uid = uid;
-            assert(state == MSG_STATE_LOCAL || state == MSG_STATE_SENT_TO_SRV || state == MSG_STATE_SENT_TO_PAIR || state == MSG_STATE_READ_BY_PAIR);
+            assert(state == null || state == MSG_STATE_LOCAL || state == MSG_STATE_SENT_TO_SRV || state == MSG_STATE_SENT_TO_PAIR || state == MSG_STATE_READ_BY_PAIR);
             this.state = state;
             this.data = data;
             this.timestamp = timestamp;
@@ -157,13 +170,19 @@ const pplane = function () {
             this.onChange = null;
         }
 
+        handleServerData(obj) {
+            if ('state' in obj) {
+                this.setState(obj.state);
+            } else {
+                console.warn("unexpected obj", obj);
+            }
+        }
+
         setState(state) {
             assert(state == MSG_STATE_LOCAL || state == MSG_STATE_SENT_TO_SRV || state == MSG_STATE_SENT_TO_PAIR || state == MSG_STATE_READ_BY_PAIR);
-            console.log("setState", this, this.state, state);
             if (this.state < state) {
                 this.state = state;
                 if (this.onChange) {
-                    console.log("change");
                     this.onChange(this);
                 }
             }

@@ -71,22 +71,25 @@ func handleIncommingMessage(c *Client, raw []byte) {
 		return
 	}
 
-	// send server ack
+	// send server ack directly to client
 	type StateUpdateMessage struct {
 		UID     string   `json:"uid"`
 		Counter int64    `json:"counter"`
 		State   MsgState `json:"state"`
 	}
 	ackMessage := StateUpdateMessage{UID: message.UID, Counter: message.Counter, State: MsgStateSentToSrv}
-	var ackBytes, err = json.Marshal(ackMessage)
-	if err != nil {
+	if ackBytes, err := json.Marshal(ackMessage); err != nil {
 		log.Fatal(err)
+	} else {
+		c.send <- ackBytes
 	}
-	c.send <- ackBytes
 
-	// broadcast
-	if c.hub != nil {
-		c.hub.broadcast <- raw
+	// distribute to other client in the hub
+	if distributedBytes, err := json.Marshal(message); err != nil {
+		log.Fatal(err)
+	} else {
+		message := DistributionMessage{src: c, payload: distributedBytes}
+		c.hub.distribute <- message
 	}
 }
 
@@ -98,9 +101,7 @@ func handleIncommingMessage(c *Client, raw []byte) {
 func (c *Client) readPump() {
 	log.Printf("CLIENT : %s connected\n", c.conn.RemoteAddr())
 	defer func() {
-		if c.hub != nil {
-			c.hub.unregister <- c
-		}
+		c.hub.unregister <- c
 		c.conn.Close()
 		log.Printf("CLIENT : %s disconnected\n", c.conn.RemoteAddr())
 	}()
@@ -174,8 +175,8 @@ func serveWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	client := &Client{hub: nil, conn: conn, send: make(chan []byte, 256)}
-	// client.hub.register <- client
+	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}
+	client.hub.register <- client
 
 	// Allow collection of memory referenced by the caller by doing all work in
 	// new goroutines.
