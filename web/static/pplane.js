@@ -28,7 +28,7 @@ const pplane = function () {
         constructor() {
             // TODO fetch items from local storage
             // conversation id
-            this.cid = null;
+            this.cid = makeUid(16);
             // local user id
             this.localUid = makeUid(16);
             // send counter
@@ -49,7 +49,6 @@ const pplane = function () {
         }
 
         connect() {
-            // TODO sync history with server when successfull
             try {
                 this.socket = new WebSocket("ws://" + document.location.host + "/ws");
             } catch (exception) {
