@@ -1,7 +1,4 @@
 const pplane = function () {
-    const PAIR_ME = 0;
-    const PAIR_OTHER = 1;
-
     const MSG_STATE_LOCAL = 0;
     const MSG_STATE_SENT_TO_SRV = 1;
     const MSG_STATE_SENT_TO_PAIR = 2;
@@ -16,14 +13,29 @@ const pplane = function () {
             throw new Error("assert error");
     }
 
+    function makeUid(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
+
     class Conv {
         constructor() {
-            // TODO fetch cid from local storage or create a new random one
+            // TODO fetch items from local storage
+            // conversation id
             this.cid = null;
-            // TODO fetch history from local storage or create a new one
+            // local user id
+            this.localUid = makeUid(16);
+            // send counter
+            this.localCtr = 0;
+            // history of messages
             this.history = new History();
-            // TODO fetch local counter from local storage
-            this.local_ctr = 0;
+
             // connection state
             this.state = CON_STATE_NONE;
             // connection socket
@@ -47,6 +59,14 @@ const pplane = function () {
             let selfConv = this;
             this.socket.onopen = function (event) {
                 selfConv.setState(CON_STATE_CONNECTED_TO_SERVER);
+                // send local messages
+                selfConv.history.forEachLocalMsg(function (msg) {
+                    try {
+                        selfConv.socket.send(msg.serialize());
+                    } catch (exception) {
+                        console.error(exception);
+                    }
+                });
             };
             this.socket.onerror = function (error) {
                 selfConv.setState(CON_STATE_NONE);
@@ -60,17 +80,24 @@ const pplane = function () {
             this.socket.onmessage = function (evt) {
                 let obj = JSON.parse(evt.data);
                 console.log("incomming data", obj);
+
+                try {
+                    selfConv.history.getMessage(obj.uid, obj.counter).setState(obj.state);
+                } catch (exception) {
+                    console.error(exception);
+                }
             };
         }
 
         send(msg) {
-            this.local_ctr += 1;
-            let message = new Message(PAIR_ME, MSG_STATE_LOCAL, msg, new Date(), this.local_ctr);
+            this.localCtr += 1;
+            let message = new Message(this.localUid, MSG_STATE_LOCAL, msg, new Date(), this.localCtr);
             this.history.addMessage(message);
-
-            // TODO update state once the server callback is received
-            this.socket.send(message.serialize());
-
+            try {
+                this.socket.send(message.serialize());
+            } catch (exception) {
+                console.error(exception);
+            }
             if (this.onMessage) {
                 this.onMessage(message);
             }
@@ -78,29 +105,49 @@ const pplane = function () {
 
         setState(state) {
             assert(state == CON_STATE_NONE || state == CON_STATE_CONNECTED_TO_SERVER || state == CON_STATE_CONNECTED_TO_PAIR);
-            let changed = this.state != state;
-            this.state = state;
-            if (changed && this.onStateChange) {
-                this.onStateChange(this);
+            if (this.state < state) {
+                this.state = state;
+                if (this.onStateChange) {
+                    this.onStateChange(this);
+                }
             }
         }
     };
 
     class History {
         constructor() {
-            this.messages = [];
+            // map : (uid, counter) -> Message
+            this.msgMap = new Map();
+        }
+
+        getMessage(uid, counter) {
+            let key = (uid, counter);
+            return this.msgMap.get(key);
+        }
+
+        // callback : void (Message)
+        forEachLocalMsg(callback) {
+            for (let msg of this.msgMap.values()) {
+                if (msg.state == MSG_STATE_LOCAL) {
+                    callback(msg);
+                }
+            }
         }
 
         addMessage(msg) {
             assert(msg instanceof Message);
-            this.messages.push(msg);
+            let key = (msg.uid, msg.counter);
+            if (!this.msgMap.has(key)) {
+                this.msgMap.set(key, msg);
+            } else {
+                console.error("existing message", key)
+            }
         }
     };
 
     class Message {
-        constructor(src_pair, state, data, timestamp, counter) {
-            assert(src_pair == PAIR_ME || src_pair == PAIR_OTHER);
-            this.src_pair = src_pair;
+        constructor(uid, state, data, timestamp, counter) {
+            this.uid = uid;
             assert(state == MSG_STATE_LOCAL || state == MSG_STATE_SENT_TO_SRV || state == MSG_STATE_SENT_TO_PAIR || state == MSG_STATE_READ_BY_PAIR);
             this.state = state;
             this.data = data;
@@ -113,24 +160,24 @@ const pplane = function () {
 
         setState(state) {
             assert(state == MSG_STATE_LOCAL || state == MSG_STATE_SENT_TO_SRV || state == MSG_STATE_SENT_TO_PAIR || state == MSG_STATE_READ_BY_PAIR);
-            let changed = this.state != state;
-            this.state = state;
-            if (changed && this.onChange) {
-                this.onChange(this);
+            console.log("setState", this, this.state, state);
+            if (this.state < state) {
+                this.state = state;
+                if (this.onChange) {
+                    console.log("change");
+                    this.onChange(this);
+                }
             }
         }
 
         serialize() {
-            let obj = { data: this.data, timestamp: this.timestamp, counter: this.counter };
+            let obj = { uid: this.uid, data: this.data, timestamp: this.timestamp, counter: this.counter };
             return JSON.stringify(obj);
         }
     };
 
     return {
         Conv: Conv,
-
-        PAIR_ME: PAIR_ME,
-        PAIR_OTHER: PAIR_OTHER,
 
         MSG_STATE_LOCAL: MSG_STATE_LOCAL,
         MSG_STATE_SENT_TO_SRV: MSG_STATE_SENT_TO_SRV,

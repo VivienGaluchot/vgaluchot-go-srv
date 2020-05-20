@@ -1,3 +1,5 @@
+let pplaneConv = new pplane.Conv();
+
 function messageToDiv(msg, div) {
     div.innerHTML = "";
     div.classList.add("message");
@@ -23,12 +25,12 @@ function messageToDiv(msg, div) {
         convStateEl.innerText = `? ${msg.state}`;
     }
 
-    if (msg.src_pair == pplane.PAIR_ME) {
+    if (msg.uid == pplaneConv.localUid) {
         div.classList.add("me");
-        pair.innerText = "me";
+        pair.innerText = `me @${msg.uid}`;
     } else {
         div.classList.add("other");
-        pair.innerText = "pair";
+        pair.innerText = `other @${msg.uid}`;
     }
 
     div.appendChild(pair);
@@ -55,7 +57,6 @@ msgEl.onkeypress = function (event) {
     }
 };
 
-let pplaneConv = new pplane.Conv();
 pplaneConv.onMessage = function (msg) {
     console.log("onMessage", msg);
     var div = document.createElement("div");

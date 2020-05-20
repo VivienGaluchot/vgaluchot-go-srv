@@ -20,6 +20,20 @@ const (
 	maxMessageSize = 512
 )
 
+// MsgState is typing the message state values, the state is seen by the client
+type MsgState int
+
+const (
+	// MsgStateLocal : message not sent to server yet
+	MsgStateLocal MsgState = 0
+	// MsgStateSentToSrv : message has been sent to server
+	MsgStateSentToSrv MsgState = 1
+	// MsgStateSentToPair : message has been sent to pair
+	MsgStateSentToPair MsgState = 2
+	// MsgStateReadByPair : message has been read by pair
+	MsgStateReadByPair MsgState = 3
+)
+
 var (
 	newline = []byte{'\n'}
 	space   = []byte{' '}
@@ -46,9 +60,10 @@ func handleIncommingMessage(c *Client, raw []byte) {
 
 	// decode message
 	type IncommingMessage struct {
-		data      string
-		timestamp string
-		counter   int64
+		UID       string `json:"uid"`
+		Data      string `json:"data"`
+		Timestamp string `json:"timestamp"`
+		Counter   int64  `json:"counter"`
 	}
 	var message IncommingMessage
 	if err := json.Unmarshal(raw, &message); err != nil {
@@ -58,16 +73,15 @@ func handleIncommingMessage(c *Client, raw []byte) {
 
 	// send server ack
 	type StateUpdateMessage struct {
-		counter int64
-		state   int64
+		UID     string   `json:"uid"`
+		Counter int64    `json:"counter"`
+		State   MsgState `json:"state"`
 	}
-	ackMessage := StateUpdateMessage{counter: message.counter, state: 1}
+	ackMessage := StateUpdateMessage{UID: message.UID, Counter: message.Counter, State: MsgStateSentToSrv}
 	var ackBytes, err = json.Marshal(ackMessage)
 	if err != nil {
 		log.Fatal(err)
 	}
-	// TODO fix bug here
-	log.Println(ackMessage)
 	c.send <- ackBytes
 
 	// broadcast
