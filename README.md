@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/VivienGaluchot/vgaluchot-go-srv/workflows/Go/badge.svg?branch=master)](https://github.com/VivienGaluchot/vgaluchot-go-srv/actions)
+
 Go web application for personnal website.
 
 Dev tools
