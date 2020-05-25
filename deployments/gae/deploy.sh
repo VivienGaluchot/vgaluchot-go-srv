@@ -34,6 +34,7 @@ info "[$0]"
     info "Deploy with $PROMOTE"
     (
         cd $STAGE_DIR
+        echo "gcloud --project=$GC_PROJECT app deploy --quiet $PROMOTE"
         gcloud --project=$GC_PROJECT app deploy --quiet $PROMOTE
     )
     echo "done"

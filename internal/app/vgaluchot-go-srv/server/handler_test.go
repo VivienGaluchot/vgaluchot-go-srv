@@ -22,23 +22,31 @@ func getHTTP(ts *httptest.Server, url string) (*http.Response, []byte) {
 	return res, body
 }
 
-func TestIndexHandler(t *testing.T) {
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		indexHandler(w, r)
-	}))
+func TestInstallHandlers(t *testing.T) {
+	mux := http.NewServeMux()
+	installHandlers(mux, true)
+	ts := httptest.NewServer(mux)
 	defer ts.Close()
 
-	// try to get url "/", shall return a success
-	res, body := getHTTP(ts, "/")
-	if res.StatusCode != 200 {
-		t.Errorf("wrong status code, got %v expected %v", res.StatusCode, 200)
-		fmt.Printf("%s", body)
+	testCases := []struct {
+		url        string
+		statusCode int
+	}{
+		{"/", 200},
+		{"/index", 200},
+		{"/index.html", 200},
+		{"/contact", 200},
+		{"/contact.html", 200},
+		{"/xxxxxx", 404},
 	}
 
-	// try to get url "/xxxxxx", shall return a 404 error
-	res, body = getHTTP(ts, "/xxxxxx")
-	if res.StatusCode != 404 {
-		t.Errorf("wrong status code, got %v expected %v", res.StatusCode, 404)
-		fmt.Printf("%s", body)
+	for _, tc := range testCases {
+		t.Run(fmt.Sprintf("test-url-status_code%s", tc.url), func(t *testing.T) {
+			res, body := getHTTP(ts, tc.url)
+			if res.StatusCode != tc.statusCode {
+				t.Errorf("wrong status code, got %v expected %v", res.StatusCode, tc.statusCode)
+				fmt.Printf("%s", body)
+			}
+		})
 	}
 }
