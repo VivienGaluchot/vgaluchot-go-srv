@@ -1,26 +1,15 @@
-<!doctype html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>contact | vgaluchot</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300;400;500;700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-        integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-
-    <link rel="icon" href="{{.Static}}/icon.svg">
-    <link rel="stylesheet" href="{{.Static}}/style.css">
-</head>
-
-<body>
-    <h1>Contact</h1>
-    <p>Current time is: {{.RequestTime}}</p>
-</body>
-
-</html>
+{{define "title"}}contact | vgaluchot{{end}}
+{{define "content"}}
+<section>
+    <div class="article">
+        <div class="title">
+            <h2 id="contact" class="anchorable">{{block "tr-contact-title" .}}Contact informations{{end}}</h2>
+        </div>
+        <div class="content">
+            {{block "tr-contact-content" .}}
+            <p><i class="fas fa-broom"></i> WORK IN PROCESS</p>
+            {{end}}
+        </div>
+    </div>
+</section>
+{{end}}

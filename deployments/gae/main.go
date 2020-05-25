@@ -4,11 +4,12 @@ import (
 	"log"
 	"os"
 
+	"github.com/VivienGaluchot/vgaluchot-go-srv/internal/app/vgaluchot-go-srv/conf"
 	"github.com/VivienGaluchot/vgaluchot-go-srv/internal/app/vgaluchot-go-srv/server"
 )
 
 func main() {
-	log.Println("Startup in GAE configuration")
+	log.Printf("Startup in GAE configuration on version '%s'\n", conf.Version)
 
 	// By configuring a static handler in app.yaml, App Engine serves all the
 	// static content itself.

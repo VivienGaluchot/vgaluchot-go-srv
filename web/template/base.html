@@ -1,0 +1,91 @@
+{{ define "base" }}
+<!DOCTYPE html>
+<html lang="{{.Base.Client.Lang}}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{block "title" .}}vgaluchot{{end}}</title>
+    <link rel="icon" href="{{.Base.Static}}/icon.svg">
+
+    {{block "css" .}}
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+        integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{.Base.Static}}/style.css">
+    {{end}}
+</head>
+
+<body class="dark">
+    <header>
+        {{block "header" .}}
+        <nav>
+            <ul>
+                <li class="nav-logo">
+                    <a href="./index.html">
+                        <div class="logo"></div>
+                        <div class="logo-next">
+                            <div class="title">Vivien Galuchot</div>
+                            <div class="subtitle">{{block "tr-base-subtitle" .}}Independent software engineer{{end}}
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="/" class="{{if (eq .Base.TemplateName "index.html") }}active{{end}}">
+                        {{block "tr-base-me" .}}Me{{end}}
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="/contact" class="{{if (eq .Base.TemplateName "contact.html") }}active{{end}}">
+                        {{block "tr-base-contact" .}}Contact{{end}}
+                    </a>
+                </li>
+                <li class="nav-box">|</li>
+                {{if (ne .Base.Client.Lang "fr") }}
+                <li class="nav-link">
+                    <a href="#" class="language-switch" onclick="local.switchLanguage('fr'); return false;">
+                        <img src="{{.Base.Static}}/lang-fr.svg"> fr</a>
+                </li>
+                {{ end }}
+                {{if (ne .Base.Client.Lang "en") }}
+                <li class="nav-link">
+                    <a href="#" class="language-switch" onclick="local.switchLanguage('en'); return false;">
+                        <img src="{{.Base.Static}}/lang-en.svg"> en</a>
+                </li>
+                {{ end }}
+            </ul>
+        </nav>
+        {{end}}
+    </header>
+    <content>
+        <div class="pagename">{{.Base.TemplateName}}</div>
+        {{template "content" .}}
+    </content>
+    <footer>
+        {{block "footer" .}}
+        <div class="share">
+            <a href="#"><i class="fas fa-comments"></i></a>
+            <a href="https://github.com/VivienGaluchot"><i class="fab fa-github-alt"></i></a>
+            <a href="https://www.linkedin.com/in/vivien-galuchot"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div>
+            {{block "tr-base-opensource" .}}
+            <a href="https://github.com/VivienGaluchot/vgaluchot-go-srv">Open-source</a> application.
+            {{end}}
+        </div>
+        <div class="version">{{.Base.Version}}</div>
+        {{end}}
+    </footer>
+
+    {{block "scripts" .}}
+    <script type="text/javascript" src="{{.Base.Static}}/script.js"></script>
+    {{end}}
+</body>
+
+</html>
+{{end}}

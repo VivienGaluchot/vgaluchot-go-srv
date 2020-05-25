@@ -227,10 +227,20 @@ nav ul li {
     padding: .5rem;
 }
 
+.nav-link>a.active {
+    font-weight: 500;
+}
+
 .nav-box {
     display: inline-block;
     padding: .5rem;
     opacity: .6;
+}
+
+.language-switch>img {
+    max-height: 1.5rem;
+    max-width: 1.5rem;
+    border: 1px solid var(--a-color);
 }
 
 /* logo */
@@ -314,6 +324,11 @@ nav ul li {
 }
 
 /* sections */
+
+.pagename {
+    font-size: .8rem;
+    opacity: .5;
+}
 
 section {
     margin: 2rem auto;
@@ -477,7 +492,11 @@ section>h2 {
     margin: .1rem;
 }
 
-/* share */
+/* footer content */
+
+footer>* {
+    margin: .4rem 0;
+}
 
 footer .share {
     display: flex;
@@ -489,6 +508,16 @@ footer .share {
 
 footer .share>* {
     padding: .6rem;
+}
+
+footer .version {
+    opacity: .5;
+    font-size: .7rem;
+    font-family: 'Roboto Mono', monospace;
+    display: inline-block;
+    border: 1px solid var(--color);
+    border-radius: .2rem;
+    padding: .1rem;
 }
 
 /* anchorable */

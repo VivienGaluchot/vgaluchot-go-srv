@@ -4,6 +4,8 @@ automatic_scaling:
   target_cpu_utilization: 0.80
   max_instances: 5
 
+# deploy.sh will setup the files to have the
+# web directory content at the root of the application
 env_variables:
   WEB_DIR: "."
 

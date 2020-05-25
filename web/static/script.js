@@ -4,6 +4,17 @@ const local = (() => {
         return x;
     };
 
+    function setCookie(name, value, daysToLive) {
+        // Encode value in order to escape semicolons, commas, and whitespace
+        var cookie = name + "=" + encodeURIComponent(value);
+        if (typeof daysToLive === "number") {
+            /* Sets the max-age attribute so that the cookie expires
+            after the specified number of days */
+            cookie += `; max-age=${daysToLive * 24 * 60 * 60}; SameSite=Strict`;
+            document.cookie = cookie;
+        }
+    }
+
     return {
         installTypingAnimation(element) {
             let text = element.innerHTML;
@@ -32,12 +43,16 @@ const local = (() => {
         },
 
         installAnchor(element) {
-            console.log(element);
             let link = document.createElement("a");
             link.setAttribute("href", "#" + element.id);
             link.innerHTML = "<i class=\"fas fa-link\"></i>";
             link.classList.add("anchor");
             element.prepend(link);
+        },
+
+        switchLanguage(lang) {
+            setCookie('lang', lang, 30);
+            window.location.reload();
         }
     };
 })();
