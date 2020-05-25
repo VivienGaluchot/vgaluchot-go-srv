@@ -3,7 +3,6 @@ const pplane = function () {
     const MSG_STATE_SENT_TO_SRV = 1;
     const MSG_STATE_SENT_TO_PAIR = 2;
     const MSG_STATE_READ_BY_PAIR = 3;
-    const MSG_STATE_REMOTE = 4;
 
     const CON_STATE_NONE = 0;
     const CON_STATE_CONNECTED_TO_SERVER = 1;
@@ -27,9 +26,7 @@ const pplane = function () {
 
     class Conv {
         constructor() {
-            // TODO fetch items from local storage
-            // conversation id
-            this.cid = 0;
+            // TODO fetch items from local storage=
             // local user id
             this.localUid = makeUid(32);
             // send counter

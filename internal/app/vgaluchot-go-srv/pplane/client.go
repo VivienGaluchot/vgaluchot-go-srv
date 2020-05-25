@@ -46,13 +46,13 @@ var upgrader = websocket.Upgrader{
 
 // Client is a middleman between the websocket connection and the hub.
 type Client struct {
-	hub *Hub
-
+	router *Router
 	// The websocket connection.
 	conn *websocket.Conn
-
 	// Buffered channel of outbound messages.
 	send chan []byte
+	// unique user identifier
+	uid string
 }
 
 func handleIncommingMessage(c *Client, raw []byte) {
@@ -70,8 +70,16 @@ func handleIncommingMessage(c *Client, raw []byte) {
 		log.Printf("unmarshal error with input '%s'\n", raw)
 		return
 	}
+	if len(c.uid) == 0 && len(message.UID) == 0 {
+		c.uid = message.UID
+		log.Printf("CLIENT : %s uid set to '%s'\n", c.conn.RemoteAddr(), c.uid)
+	} else if message.UID != c.uid {
+		// drop messages with wrong uid
+		log.Printf("message dropped : uid error with input '%s' from client '%s'\n", raw, c.uid)
+		return
+	}
 
-	// send server ack directly to client
+	// send server ack to client
 	type StateUpdateMessage struct {
 		UID     string   `json:"uid"`
 		Counter int64    `json:"counter"`
@@ -84,12 +92,12 @@ func handleIncommingMessage(c *Client, raw []byte) {
 		c.send <- ackBytes
 	}
 
-	// distribute to other client in the hub
+	// distribute to admin
 	if distributedBytes, err := json.Marshal(message); err != nil {
 		log.Fatal(err)
 	} else {
-		message := DistributionMessage{src: c, payload: distributedBytes}
-		c.hub.distribute <- message
+		message := AdmincastMessage{src: c, payload: distributedBytes}
+		c.router.admincast <- message
 	}
 }
 
@@ -101,7 +109,7 @@ func handleIncommingMessage(c *Client, raw []byte) {
 func (c *Client) readPump() {
 	log.Printf("CLIENT : %s connected\n", c.conn.RemoteAddr())
 	defer func() {
-		c.hub.unregister <- c
+		c.router.unregister <- c
 		c.conn.Close()
 		log.Printf("CLIENT : %s disconnected\n", c.conn.RemoteAddr())
 	}()
@@ -147,14 +155,6 @@ func (c *Client) writePump() {
 			}
 			log.Printf("CLIENT : %s <- '%s'\n", c.conn.RemoteAddr(), message)
 			w.Write(message)
-
-			// Add queued chat messages to the current websocket message.
-			// n := len(c.send)
-			// for i := 0; i < n; i++ {
-			// 	w.Write(newline)
-			// 	w.Write(<-c.send)
-			// }
-
 			if err := w.Close(); err != nil {
 				return
 			}
@@ -168,18 +168,18 @@ func (c *Client) writePump() {
 }
 
 // serveWs handles websocket requests from the peer.
-func serveWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
-
+func serveWs(router *Router, w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}
-	client.hub.register <- client
+	client := &Client{router: router, conn: conn, send: make(chan []byte, 256)}
+	if len(client.router.admins) == 0 {
+		client.router.registerAdmin <- client
+	}
 
-	// Allow collection of memory referenced by the caller by doing all work in
-	// new goroutines.
+	// Allow collection of memory referenced by the caller by doing all work in new goroutines.
 	go client.writePump()
 	go client.readPump()
 }

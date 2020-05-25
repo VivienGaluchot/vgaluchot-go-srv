@@ -27,7 +27,7 @@ function messageToDiv(msg, div) {
 
     if (msg.uid == pplaneConv.localUid) {
         div.classList.add("me");
-        pair.innerText = `me @${msg.uid}`;
+        pair.innerText = `me`;
     } else {
         div.classList.add("other");
         pair.innerText = `other @${msg.uid}`;
@@ -42,7 +42,6 @@ function messageToDiv(msg, div) {
 }
 
 let msgEl = document.getElementById("i-msg");
-let chanEl = document.getElementById("i-chan");
 let convEl = document.getElementById("o-conv");
 let convStateEl = document.getElementById("o-conv-state");
 
@@ -94,8 +93,3 @@ document.getElementById("sendform").onsubmit = function () {
     msgEl.value = "";
     return false;
 };
-
-document.addEventListener("DOMContentLoaded", function (evt) {
-    chanEl.value = pplaneConv.cid;
-    console.log(chanEl);
-});

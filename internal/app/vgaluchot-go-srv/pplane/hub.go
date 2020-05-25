@@ -2,70 +2,54 @@ package pplane
 
 import "log"
 
-// DistributionMessage is a payload to distribute to all clients except the sender
-type DistributionMessage struct {
+// AdmincastMessage is a message to send to admin
+type AdmincastMessage struct {
 	src     *Client
 	payload []byte
 }
 
-// Hub maintains the set of active clients and broadcasts messages to the
-// clients.
-type Hub struct {
-	// Registered clients.
-	clients map[*Client]bool
-
-	// Payload to broadcast to all clients.
-	broadcast chan []byte
-
-	// Payload to distribute to all clients except the sender.
-	distribute chan DistributionMessage
-
-	// Register requests from the clients.
-	register chan *Client
-
-	// Unregister requests from clients.
+// Router direct messages from client to client.
+type Router struct {
+	// Registered admins.
+	admins map[*Client]bool
+	// Register an admin client.
+	registerAdmin chan *Client
+	// Unregister a client.
 	unregister chan *Client
+	// Payload to send to the admin client.
+	admincast chan AdmincastMessage
 }
 
-func newHub() *Hub {
-	return &Hub{
-		broadcast:  make(chan []byte),
-		distribute: make(chan DistributionMessage),
-		register:   make(chan *Client),
-		unregister: make(chan *Client),
-		clients:    make(map[*Client]bool),
+func newRouter() *Router {
+	return &Router{
+		admins:        make(map[*Client]bool),
+		registerAdmin: make(chan *Client),
+		unregister:    make(chan *Client),
+		admincast:     make(chan AdmincastMessage),
 	}
 }
 
-func (h *Hub) run() {
+func (h *Router) run() {
 	for {
 		select {
-		case client := <-h.register:
-			log.Printf("HUB : %s registered\n", client.conn.RemoteAddr())
-			h.clients[client] = true
+		case client := <-h.registerAdmin:
+			log.Printf("Router : admin %s registered\n", client.conn.RemoteAddr())
+			h.admins[client] = true
 		case client := <-h.unregister:
-			log.Printf("HUB : %s unregistered\n", client.conn.RemoteAddr())
-			if _, ok := h.clients[client]; ok {
-				delete(h.clients, client)
+			log.Printf("Router : admin %s unregistered\n", client.conn.RemoteAddr())
+			if _, ok := h.admins[client]; ok {
+				delete(h.admins, client)
 				close(client.send)
 			}
-		case message := <-h.broadcast:
-			for client := range h.clients {
-				select {
-				case client.send <- message:
-				default:
-					close(client.send)
-					delete(h.clients, client)
-				}
-			}
-		case message := <-h.distribute:
-			for client := range h.clients {
-				if message.src != client {
+		case message := <-h.admincast:
+			log.Printf("Router : admincast %s\n", message.payload)
+			for client := range h.admins {
+				if client != message.src {
 					select {
 					case client.send <- message.payload:
 					default:
 						close(client.send)
-						delete(h.clients, client)
+						delete(h.admins, client)
 					}
 				}
 			}
