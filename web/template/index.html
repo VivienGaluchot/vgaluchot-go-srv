@@ -1,17 +1,259 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-    <link rel="stylesheet" type="text/css" href="{{.Static}}/style.css">
+
+    <title>vgaluchot</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+        integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+
+    <link rel="icon" href="{{.Static}}/icon.svg">
+    <link rel="stylesheet" href="{{.Static}}/style.css">
 </head>
 
-<body>
-    <h1>Index</h1>
-    <p>Current time is: {{.RequestTime}}</p>
-    <script type="text/javascript" src="{{.Static}}/app.js"></script>
+<body class="dark">
+    <header>
+        <nav>
+            <ul>
+                <li class="nav-logo">
+                    <a href="./index.html">
+                        <div class="logo"></div>
+                        <div class="logo-next">
+                            <div class="title">Vivien Galuchot</div>
+                            <div class="subtitle">Independent software ingeneer</div>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-link"><a href="#">Me</a></li>
+                <li class="nav-link"><a href="/contact">Contact</a></li>
+                <li class="nav-box"><i class="fas fa-language"></i> Francais</li>
+            </ul>
+        </nav>
+    </header>
+    <content>
+        <section>
+            <div class="quote-box">
+                <div class="author">vivien</div>
+                <h1 class="quote">"Hello world !"</h1>
+            </div>
+        </section>
+        <section>
+            <div class="article">
+                <div class="title">
+                    <h2 id="welcome" class="anchorable">Welcome</h2>
+                </div>
+                <div class="content">
+                    <p>Welcome to my personal website. I use it to present what i do. It is still in
+                        construction.</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>App</h2>
+            <div class="flex-container">
+                <div class="article card">
+                    <div class="title">
+                        <img src="{{.Static}}/imgs/radius.png">
+                        <h2 id="radius" class="anchorable">Radius</h2>
+                        <div class="timestamp">12/05/2020</div>
+                    </div>
+                    <div class="picture" style="background-color: #edece7;">
+                        <img src="{{.Static}}/imgs/radius_preview.jpg">
+
+                    </div>
+                    <div class="content">
+                        <div class="badges">
+                            <span class="badge-keyword">android</span>
+                            <span class="badge-keyword">kotlin</span>
+                            <span class="badge-keyword">geofence</span>
+                            <span class="badge-keyword">google maps api</span>
+                        </div>
+                        <p>
+                            Android application allowing to visualize a geographic radius and to be notified when you
+                            exit it.
+                        </p>
+                        <p><b>Thanks</b> to <a href="https://www.lemonde.fr/signataires/nicolas-six/">Nicolas Six</a>
+                            for his
+                            <a
+                                href="https://www.lemonde.fr/pixels/article/2020/05/19/deconfinement-trois-outils-recommandables-pour-respecter-la-limite-des-100-kilometres_6040133_4408996.html">article</a>
+                            on lemonde.fr pushing from 10+ to 1 000+ users !
+                        </p>
+                        <p>
+                            <a
+                                href='https://play.google.com/store/apps/details?id=com.vgaluc.radius&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+                                <img alt='Get it on Google Play'
+                                    src='https://play.google.com/intl/en_us/badges/{{.Static}}/images/badges/en_badge_web_generic.png'
+                                    height='64px' />
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Fun with JS</h2>
+            <div class="flex-container">
+                <div class="article card">
+                    <div class="title">
+                        <h2 id="choose_your_planet" class="anchorable">choose_your_planet</h2>
+                        <div class="timestamp">12/05/2020</div>
+                    </div>
+                    <div class="picture" style="background-color: #0b0505;">
+                        <img src="{{.Static}}/imgs/choose_your_planet_preview.jpg">
+                    </div>
+                    <div class="content">
+                        <div class="badges">
+                            <span class="badge-keyword">game</span>
+                            <span class="badge-keyword">js</span>
+                            <span class="badge-keyword">physics</span>
+                            <span class="badge-keyword">simulation</span>
+                        </div>
+                        <p>
+                            Random <b>game</b> based on planetary genesis simulation. The gload is to find witch
+                            planet will eat all the others.
+                        </p>
+                    </div>
+                    <div class="footer">
+                        <a href="https://viviengaluchot.github.io/choose_your_planet/index.html">live demo</a> |
+                        <a href="https://github.com/VivienGaluchot/choose_your_planet">code <i
+                                class="fab fa-github-alt"></i></a>
+                    </div>
+                </div>
+                <div class="article card">
+                    <div class="title">
+                        <h2 id="boids" class="anchorable">boids</h2>
+                        <div class="timestamp">12/05/2020</div>
+                    </div>
+                    <div class="picture" style="background-color: #0b0505;">
+                        <img src="{{.Static}}/imgs/boids_preview.jpg">
+                    </div>
+                    <div class="content">
+                        <div class="badges">
+                            <span class="badge-keyword">js</span>
+                            <span class="badge-keyword">physics</span>
+                            <span class="badge-keyword">simulation</span>
+                        </div>
+                        <p>
+                            JavaScript (mediocre) implementation of bird flock simulation.
+                        </p>
+                    </div>
+                    <div class="footer">
+                        <a href="https://viviengaluchot.github.io/boids/index.html">live demo</a> |
+                        <a href="https://github.com/VivienGaluchot/boids">code <i class="fab fa-github-alt"></i></a>
+                    </div>
+                </div>
+                <div class="article card">
+                    <div class="title">
+                        <h2 id="mindiff_layout" class="anchorable">mindiff_layout</h2>
+                        <div class="timestamp">01/05/2020</div>
+                    </div>
+                    <div class="content">
+                        <div class="badges">
+                            <span class="badge-keyword">js</span>
+                            <span class="badge-keyword">layout</span>
+                        </div>
+                        <p>Layout of expendable elements with interger size keeping minimal size difference.</p>
+                    </div>
+                    <div class="footer">
+                        <a href="https://viviengaluchot.github.io/mindiff_layout/demo/index.html">live demo</a> |
+                        <a href="https://github.com/VivienGaluchot/mindiff_layout">code <i
+                                class="fab fa-github-alt"></i></a>
+                    </div>
+                </div>
+                <div class="article card">
+                    <div class="title">
+                        <h2 id="fun_with_p5js" class="anchorable">fun_with_p5js</h2>
+                        <div class="timestamp">12/05/2020</div>
+                    </div>
+                    <div class="picture" style="background-color: #f0f0f0;">
+                        <img src="{{.Static}}/imgs/fun_with_p5js_preview.jpg">
+                    </div>
+                    <div class="content">
+                        <div class="badges">
+                            <span class="badge-keyword">js</span>
+                            <span class="badge-keyword">p5</span>
+                            <span class="badge-keyword">physics</span>
+                            <span class="badge-keyword">simulation</span>
+                        </div>
+                        <p>
+                            Little tests of the <a href="https://p5js.org/">p5.js</a> library. Implement an automatic
+                            graph node positionning based on spring physics.
+                        </p>
+                    </div>
+                    <div class="footer">
+                        <a href="https://viviengaluchot.github.io/fun_with_p5js/index.html">live demo</a> |
+                        <a href="https://github.com/VivienGaluchot/fun_with_p5js">code <i
+                                class="fab fa-github-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Visual</h2>
+            <div class="flex-container">
+                <div class="article card">
+                    <div class="title">
+                        <h2 id="logos" class="anchorable">Logos</h2>
+                        <div class="timestamp">01/05/2020</div>
+                    </div>
+                    <div class="content">
+                        <div class="badges">
+                            <span class="badge-keyword">design</span>
+                        </div>
+                        <p><a href="{{.Static}}/logo/index.html">Test page</a> I used to find the right logo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="article">
+                <div class="title">
+                    <h2 id="generic" class="anchorable">The End</h2>
+                </div>
+                <div class="content">
+                    <p>I did this website with the help of the followings services:</p>
+                    <ul>
+                        <li>Design guidelines <a href="https://material.io">material.io</a></li>
+                        <li>Icons from <a href="https://fontawesome.com">fontawesome.com</a></li>
+                        <li>JS framework <a href="http://vanilla-js.com/">vanilla-js</a></li>
+                        <li>IDE <a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
+                        <li>Code hosting and versionning <b>git</b> & <a href="http://github.com/">github.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer">
+                    <p>
+                        <a href="https://viviengaluchot.github.io/vgaluchot/index.html">live demo (just in case)</a> |
+                        <a href="https://github.com/VivienGaluchot/vgaluchot">code <i class="fab fa-github-alt"></i></a>
+                    </p>
+                </div>
+            </div>
+            <div class="article">
+            </div>
+        </section>
+    </content>
+    <footer>
+        <div class="share">
+            <a href="#"><i class="fas fa-comments"></i></a>
+            <a href="https://github.com/VivienGaluchot"><i class="fab fa-github-alt"></i></a>
+            <a href="https://www.linkedin.com/in/vivien-galuchot"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div>
+            Open-source website hosted by <a href="https://github.com/VivienGaluchot/vgaluchot">github</a>.
+        </div>
+        <div>
+            <small>0.0.3</small>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="{{.Static}}/script.js"></script>
 </body>
 
 </html>

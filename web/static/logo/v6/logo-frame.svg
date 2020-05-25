@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 20.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 283.5 283.5" style="enable-background:new 0 0 283.5 283.5;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#010202;}
+</style>
+<path class="st0" d="M277.8,5.7v272.2H5.7V5.7H277.8 M277.8,0H5.7C2.5,0,0,2.5,0,5.7v272.2c0,3.1,2.5,5.7,5.7,5.7h272.2
+	c3.1,0,5.7-2.5,5.7-5.7V5.7C283.5,2.5,281,0,277.8,0L277.8,0z"/>
+<path d="M138.9,141.8H99.2c-4.7,0-8.5-3.8-8.5-8.5V73.7c0-4.7,3.8-8.5,8.5-8.5h48.2v17h-39.7v42.5h22.7v-20.8h17v29.3
+	C147.4,138,143.6,141.8,138.9,141.8z"/>
+<polygon points="44.7,136.9 34.7,126.8 58,103.5 34.7,80.2 44.7,70.1 78.1,103.5 "/>
+<rect x="163" y="140.4" width="53.9" height="14.2">
+	<animate attributeType="XML" attributeName="visibility" from="visible" to="hidden" dur="2s" repeatCount="indefinite"/>
+</rect>
+</svg>
