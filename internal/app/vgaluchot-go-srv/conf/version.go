@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 )
 
 // Version is a string of the currently running application version
@@ -16,5 +17,5 @@ func getVersion() string {
 		log.Println("version.txt file not found, fallback to GIT_VERSION env variable")
 		return os.Getenv("GIT_VERSION")
 	}
-	return string(data)
+	return strings.TrimSpace(string(data))
 }
