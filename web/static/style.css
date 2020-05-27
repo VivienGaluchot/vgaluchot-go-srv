@@ -460,6 +460,7 @@ section>h2 {
     max-height: 10rem;
     object-fit: contain;
     object-position: center;
+    border-bottom: 1px solid var(--neutral-dark);
 }
 
 .article .footer {

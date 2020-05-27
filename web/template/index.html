@@ -1,4 +1,5 @@
 {{define "tr-index-live_demo"}}live demo{{end}}
+{{define "tr-index-see"}}see{{end}}
 
 {{define "content"}}
 <section>
@@ -19,6 +20,61 @@
                 is still in construction.
             </p>
             {{end}}
+        </div>
+    </div>
+</section>
+<section>
+    <h2>Site web</h2>
+    <div class="flex-container">
+        <div class="article card">
+            <div class="title">
+                <h2 id="idp" class="anchorable">idp.onl</h2>
+                <div class="timestamp">01/01/2019</div>
+            </div>
+            <div class="picture" style="background-color: #ecedef;">
+                <img src="{{.Base.Static}}/imgs/idp_preview.jpg">
+            </div>
+            <div class="content">
+                {{block "tr-index-idp_onl-content" .}}
+                <div class="badges">
+                    <span class="badge-keyword">django</span>
+                    <span class="badge-keyword">mysql</span>
+                    <span class="badge-keyword">google app engine</span>
+                </div>
+                <p>
+                    <a href="https://idp.onl">idp.onl</a> is a French group of local artisan. I designed and maintain
+                    their website.
+                </p>
+                {{end}}
+            </div>
+            <div class="footer">
+                <a href="https://idp.onl">{{template "tr-index-see" .}}</a>
+            </div>
+        </div>
+        <div class="article card">
+            <div class="title">
+                <h2 id="lantrechaux" class="anchorable">lantrechaux.com</h2>
+                <div class="timestamp">01/01/2019</div>
+            </div>
+            <div class="picture" style="background-color: white;">
+                <img src="{{.Base.Static}}/imgs/lantrechaux_preview.jpg">
+            </div>
+            <div class="content">
+                {{block "tr-index-lantrechaux-content" .}}
+                <div class="badges">
+                    <span class="badge-keyword">static website</span>
+                    <span class="badge-keyword">ovh</span>
+                </div>
+                <p>
+                    <a href="https://lantrechaux.com">lantrechaux.com</a> is a wedding hall not yet opened. I am
+                    designing
+                    their website, a static webpage is displayed awaiting opening.
+                </p>
+                {{end}}
+            </div>
+            <div class="footer">
+                <a href="https://lantrechaux.com">{{template "tr-index-see" .}}</a>
+            </div>
         </div>
     </div>
 </section>
@@ -67,7 +123,7 @@
     </div>
 </section>
 <section>
-    <h2>{{block "tr-index-fun_with_js" .}}Fun with JS{{end}}</h2>
+    <h2>{{block "tr-index-mini_projects" .}}Mini projects{{end}}</h2>
     <div class="flex-container">
         <div class="article card">
             <div class="title">

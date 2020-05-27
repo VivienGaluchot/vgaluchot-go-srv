@@ -1,13 +1,45 @@
 {{define "tr-index-live_demo"}}démo{{end}}
+{{define "tr-index-see"}}voir{{end}}
 {{define "tr-index-just_in_case"}}(au cas ou...){{end}}
 
 
 {{define "tr-index-welcome-title"}}Bienvenue{{end}}
 {{define "tr-index-welcome-content"}}
 <p>
-    Bienvenue sur mon site personnel. Je l'utilise pour présenter ce que je fais. Il est encore en construction.
+    Bienvenue sur mon site personnel (encore en construction), il présente quelques projets
+    que j'ai réalisé.
+</p>
+<p>
+    Initialement spécialisé dans les systèmes critiques embarqués, j'explore les
+    domaines des applications web et mobile au travers de projets personnels.
 </p>
 {{end}}
+
+
+{{define "tr-index-idp_onl-content"}}
+<div class="badges">
+    <span class="badge-keyword">django</span>
+    <span class="badge-keyword">mysql</span>
+    <span class="badge-keyword">google app engine</span>
+</div>
+<p>
+    <a href="https://idp.onl">idp.onl</a> est un groupement d'artisans local. J'ai conçu et réalise la maintenance de
+    leur site web.
+</p>
+{{end}}
+
+
+{{block "tr-index-lantrechaux-content" .}}
+<div class="badges">
+    <span class="badge-keyword">site statique</span>
+    <span class="badge-keyword">ovh</span>
+</div>
+<p>
+    <a href="https://lantrechaux.com">lantrechaux.com</a> est une salle de mariage pas encore ouverte. Je suis en charge
+    de concevoir leur site, une page web statique est affichée en attendant.
+</p>
+{{end}}
+
 
 {{define "tr-index-radius-content"}}
 <div class="badges">
@@ -35,7 +67,9 @@
 </p>
 {{end}}
 
-{{define "tr-index-fun_with_js"}}Fun avec JS{{end}}
+
+{{define "tr-index-mini_projects"}}Mini projets{{end}}
+
 
 {{define "tr-index-choose_your_planet-content"}}
 <div class="badges">
@@ -49,6 +83,7 @@
     qui mangera les autres.
 </p>
 {{end}}
+
 
 {{define "tr-index-boids-content"}}
 <div class="badges">
