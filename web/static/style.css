@@ -296,9 +296,29 @@ nav ul li {
 /* quote */
 
 .quote-box {
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
     text-align: left;
     margin: 1rem;
+    align-items: center;
+}
+
+.quote-box>* {
+    margin: .5rem;
+}
+
+.quote-box>.profile {
+    max-height: 4rem;
+    max-width: 4rem;
+    border-radius: 4rem;
+    border: 1px solid var(--color);
+}
+
+@media (max-width: 600px) {
+    .quote-box>.profile {
+        max-height: 3rem;
+        max-width: 3rem;
+    }
 }
 
 .quote-box .author {
@@ -338,7 +358,7 @@ section {
 
 @media (max-width: 600px) {
     section {
-        margin: 1rem 0;
+        margin: 1rem auto;
     }
 }
 
