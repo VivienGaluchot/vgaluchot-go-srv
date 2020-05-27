@@ -298,7 +298,7 @@ nav ul li {
 .quote-box {
     display: inline-block;
     text-align: left;
-    margin-bottom: 1rem;
+    margin: 1rem;
 }
 
 .quote-box .author {
