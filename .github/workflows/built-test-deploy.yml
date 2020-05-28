@@ -42,7 +42,7 @@ jobs:
     name: deploy on GAE
     needs: build-test
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'ref/head/master' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     steps:
 
     - name: Checkout
