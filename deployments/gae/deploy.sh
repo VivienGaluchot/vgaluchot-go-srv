@@ -11,7 +11,7 @@ info "[$0]"
         PROMOTE="--promote"
     fi
 
-    GIT_VERSION=$(git describe --all --dirty --broken)
+    GIT_VERSION=$(git rev-parse --short HEAD)-$(git describe --all --dirty --broken)
     echo GIT_VERSION $GIT_VERSION
     echo ""
 

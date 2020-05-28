@@ -1,7 +1,7 @@
 # build tool
 
 TMP := tmp/build
-GIT_VERSION := $(shell git describe --all --dirty --broken)
+GIT_VERSION := $(shell git rev-parse --short HEAD)-$(shell git describe --all --dirty --broken)
 export GIT_VERSION
 
 .PHONY: all build test run clean
