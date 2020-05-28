@@ -1,0 +1,57 @@
+name: build, test and deploy
+
+on:
+  push:
+    branches:
+      - master
+      - int/**
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-test:
+    name: build and test
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Go 1.x
+      uses: actions/setup-go@v2
+      with:
+        go-version: ^1.13
+      id: go
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Lint
+      # reformate sed output to generate github warning
+      # https://help.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-a-warning-message
+      run: |-
+        go get -u golang.org/x/lint/golint
+        golint ./... | sed -r 's/(.*):(.*):(.*):(.*)/::warning file=\1,line=\2,col=\3::\4/'
+
+
+    - name: Build
+      run: make build
+
+    - name: Test
+      run: make test
+
+  deploy:
+    name: deploy on GAE
+    needs: build-test
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'ref/head/master' }}
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets.GAE_SA_KEY }}
+        project_id: vgaluchot
+      
+    - name: Deploy
+      run: ./deployments/gae/deploy.sh
