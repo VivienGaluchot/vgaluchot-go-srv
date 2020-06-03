@@ -2,7 +2,7 @@ runtime: go113
 
 automatic_scaling:
   target_cpu_utilization: 0.80
-  max_instances: 5
+  max_instances: 1
 
 # deploy.sh will setup the files to have the
 # web directory content at the root of the application
