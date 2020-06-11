@@ -1,0 +1,129 @@
+{{define "tr-index-live_demo"}}démo{{end}}
+{{define "tr-index-see"}}voir{{end}}
+{{define "tr-index-just_in_case"}}(au cas ou...){{end}}
+
+{{define "tr-index-websites"}}Sites web{{end}}
+
+
+{{define "tr-index-idp_onl-content"}}
+<div class="badges">
+    <span class="badge-keyword">django</span>
+    <span class="badge-keyword">mysql</span>
+    <span class="badge-keyword">google app engine</span>
+</div>
+<p>
+    <a href="https://idp.onl">idp.onl</a> est un groupement d'artisans local. J'ai conçu et réalise la maintenance de
+    leur site web.
+</p>
+{{end}}
+
+
+{{block "tr-index-lantrechaux-content" .}}
+<div class="badges">
+    <span class="badge-keyword">site statique</span>
+    <span class="badge-keyword">ovh</span>
+</div>
+<p>
+    <a href="https://lantrechaux.com">lantrechaux.com</a> est une salle de mariage pas encore ouverte. Je suis en charge
+    de concevoir leur site, une page web statique est affichée en attendant.
+</p>
+{{end}}
+
+
+{{define "tr-index-radius-content"}}
+<div class="badges">
+    <span class="badge-keyword">android</span>
+    <span class="badge-keyword">kotlin</span>
+    <span class="badge-keyword">geofence</span>
+    <span class="badge-keyword">google maps api</span>
+</div>
+<p>
+    Application Android permettant de visualiser un rayon géographique et d'être notifié lorsque l'on en sort.
+</p>
+<p><b>Merci</b> à <a href="https://www.lemonde.fr/signataires/nicolas-six/">Nicolas Six</a>
+    pour son
+    <a
+        href="https://www.lemonde.fr/pixels/article/2020/05/19/deconfinement-trois-outils-recommandables-pour-respecter-la-limite-des-100-kilometres_6040133_4408996.html">article</a>
+    sur <b>lemonde.fr</b> l'ayant fait passé de 10+ à 1000+ utilisateurs !
+</p>
+<p>
+    <a
+        href='https://play.google.com/store/apps/details?id=com.vgaluc.radius&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+        <img alt='Disponible sur Google Play'
+            src='https://play.google.com/intl/fr_fr/badges/{{.Base.Static}}/images/badges/fr_badge_web_generic.png'
+            height='64px' />
+    </a>
+</p>
+{{end}}
+
+
+{{define "tr-index-mini_projects"}}Mini projets{{end}}
+
+
+{{define "tr-index-choose_your_planet-content"}}
+<div class="badges">
+    <span class="badge-keyword">jeux</span>
+    <span class="badge-keyword">js</span>
+    <span class="badge-keyword">physique</span>
+    <span class="badge-keyword">simulation</span>
+</div>
+<p>
+    <b>Jeux</b> aléatoire basé sur une simulation de genèse planétaire. Le but est de trouver quelle planète sera celle
+    qui mangera les autres.
+</p>
+{{end}}
+
+
+{{define "tr-index-boids-content"}}
+<div class="badges">
+    <span class="badge-keyword">js</span>
+    <span class="badge-keyword">physique</span>
+    <span class="badge-keyword">simulation</span>
+</div>
+<p>
+    Implémentation Javascript (médiocre) d'une simulation de flots d'oiseaux.
+</p>
+{{end}}
+
+
+{{define "tr-index-mindiff_layout-content"}}
+<div class="badges">
+    <span class="badge-keyword">js</span>
+    <span class="badge-keyword">layout</span>
+</div>
+<p>Positionnement d'éléments entendables de taille entière sur une grille en conservant une différence de taille
+    minimale entre eux.</p>
+{{end}}
+
+
+{{define "tr-index-fun_with_p5js-content"}}
+<div class="badges">
+    <span class="badge-keyword">js</span>
+    <span class="badge-keyword">p5</span>
+    <span class="badge-keyword">physique</span>
+    <span class="badge-keyword">simulation</span>
+</div>
+<p>
+    Essais de la librairie <a href="https://p5js.org/">p5.js</a>. Implémentation d'un positionnement automatique de
+    noeuds de graphe basé sur la physique des ressorts.
+</p>
+{{end}}
+
+
+{{define "tr-index-the_end-title"}}Générique{{end}}
+
+
+{{define "tr-index-the_end-content"}}
+<p>J'ai réalisé ce site avec l'aide des services et technologies suivants :</p>
+<ul>
+    <li>Directives graphique <a href="https://material.io">material.io</a></li>
+    <li>Icônes de <a href="https://fontawesome.com">fontawesome.com</a></li>
+    <li>JS framework <a href="http://vanilla-js.com/">vanilla-js</a></li>
+    <li>Backend <a href="https://golang.org/">Go</a></li>
+    <li>IDE <a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
+    <li>Versionnage de code <b>git</b> & <a href="http://github.com/">github.com</a></li>
+    <li>Hébergement par
+        <a href="https://cloud.google.com/appengine">Google App Engine</a>
+    </li>
+</ul>
+{{end}}

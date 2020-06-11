@@ -1,15 +1,17 @@
 {{define "title"}}contact | vgaluchot{{end}}
 {{define "content"}}
 <section>
-    <div class="article">
-        <div class="title">
-            <h2 id="contact" class="anchorable">{{block "tr-contact-title" .}}Contact informations{{end}}</h2>
-        </div>
-        <div class="content">
-            {{block "tr-contact-content" .}}
-            <p>You can reach me at <b>contact@vgaluchot.dev</b> for any request.</p>
-            <p><i class="fas fa-broom"></i> WORK IN PROCESS</p>
-            {{end}}
+    <div class="article-container">
+        <div class="article">
+            <div class="title">
+                <h2 id="contact" class="anchorable">{{block "tr-contact-title" .}}Contact{{end}}</h2>
+            </div>
+            <div class="content">
+                {{block "tr-contact-content" .}}
+                <p>You can reach me at <b>contact@vgaluchot.dev</b> for any request.</p>
+                <p><i class="fas fa-broom"></i> WORK IN PROCESS</p>
+                {{end}}
+            </div>
         </div>
     </div>
 </section>

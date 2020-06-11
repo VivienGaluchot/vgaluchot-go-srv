@@ -26,6 +26,10 @@ func init() {
 			"en": []string{"base.html", "index.html"},
 			"fr": []string{"base.html", "base-fr.html", "index.html", "index-fr.html"},
 		},
+		"portfolio.html": {
+			"en": []string{"base.html", "portfolio.html"},
+			"fr": []string{"base.html", "base-fr.html", "portfolio.html", "portfolio-fr.html"},
+		},
 		"contact.html": {
 			"en": []string{"base.html", "contact.html"},
 			"fr": []string{"base.html", "base-fr.html", "contact.html", "contact-fr.html"},

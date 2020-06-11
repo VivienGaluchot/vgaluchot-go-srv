@@ -6,9 +6,6 @@ import (
 	"github.com/VivienGaluchot/vgaluchot-go-srv/internal/app/vgaluchot-go-srv/conf"
 )
 
-var indexView func(w http.ResponseWriter, r *http.Request) = makeTemplateHandler("index.html", getIndexContext)
-var contactView func(w http.ResponseWriter, r *http.Request) = makeTemplateHandler("contact.html", getContactContext)
-
 // contexts
 
 func getBaseContext(processingCtx TemplateProcessingCtx) interface{} {
@@ -37,6 +34,8 @@ func getBaseContext(processingCtx TemplateProcessingCtx) interface{} {
 	return data
 }
 
+// index
+
 func getIndexContext(processingCtx TemplateProcessingCtx) interface{} {
 	type Context struct {
 		Base interface{}
@@ -47,6 +46,24 @@ func getIndexContext(processingCtx TemplateProcessingCtx) interface{} {
 	return data
 }
 
+var indexView func(w http.ResponseWriter, r *http.Request) = makeTemplateHandler("index.html", getIndexContext)
+
+// portfolio
+
+func getPortfolioContext(processingCtx TemplateProcessingCtx) interface{} {
+	type Context struct {
+		Base interface{}
+	}
+	data := Context{
+		Base: getBaseContext(processingCtx),
+	}
+	return data
+}
+
+var portfolioView func(w http.ResponseWriter, r *http.Request) = makeTemplateHandler("portfolio.html", getPortfolioContext)
+
+// contact
+
 func getContactContext(processingCtx TemplateProcessingCtx) interface{} {
 	type Context struct {
 		Base interface{}
@@ -56,3 +73,5 @@ func getContactContext(processingCtx TemplateProcessingCtx) interface{} {
 	}
 	return data
 }
+
+var contactView func(w http.ResponseWriter, r *http.Request) = makeTemplateHandler("contact.html", getContactContext)

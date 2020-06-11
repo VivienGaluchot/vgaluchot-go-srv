@@ -24,20 +24,25 @@
     <header>
         {{block "header" .}}
         <nav>
-            <ul>
-                <li class="nav-logo">
-                    <a href="/">
-                        <div class="logo"></div>
-                        <div class="logo-next">
-                            <div class="title">Vivien Galuchot</div>
-                            <div class="subtitle">{{block "tr-base-subtitle" .}}Software engineer{{end}}
-                            </div>
+            <div class="nav-logo">
+                <a href="/">
+                    <div class="logo"></div>
+                    <div class="logo-next">
+                        <div class="title">Vivien Galuchot</div>
+                        <div class="subtitle">{{block "tr-base-subtitle" .}}Software engineer{{end}}
                         </div>
-                    </a>
-                </li>
+                    </div>
+                </a>
+            </div>
+            <ul>
                 <li class="nav-link">
                     <a href="/" class="{{if (eq .Base.TemplateName "index.html") }}active{{end}}">
                         {{block "tr-base-me" .}}Me{{end}}
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="/portfolio" class="{{if (eq .Base.TemplateName "portfolio.html") }}active{{end}}">
+                        {{block "tr-base-portfolio" .}}Portfolio{{end}}
                     </a>
                 </li>
                 <li class="nav-link">
@@ -73,11 +78,11 @@
             <a href="https://www.linkedin.com/in/vivien-galuchot"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div>
-            {{block "tr-base-opensource" .}}
-            <a href="https://github.com/VivienGaluchot/vgaluchot-go-srv">Open-source</a> application.
-            {{end}}
+            <a href="https://github.com/VivienGaluchot/vgaluchot-go-srv" class="version">
+                {{block "tr-base-opensource" .}}Open-source application{{end}}<br>
+                {{.Base.Version}}
+            </a>
         </div>
-        <div class="version">{{.Base.Version}}</div>
         {{end}}
     </footer>
 

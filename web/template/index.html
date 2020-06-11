@@ -1,124 +1,25 @@
-{{define "tr-index-live_demo"}}live demo{{end}}
-{{define "tr-index-see"}}see{{end}}
-
 {{define "content"}}
 <section>
-    <div class="quote-box">
-        <img class="profile" src="{{.Base.Static}}/imgs/profile.jpg">
-        <div class="text">
-            <div class="author">vivien</div>
-            <h1 class="quote">"Hello world !"</h1>
-        </div>
-    </div>
-</section>
-<section>
-    <div class="article">
-        <div class="title">
-            <h2 id="welcome" class="anchorable">{{block "tr-index-welcome-title" .}}Welcome{{end}}</h2>
-        </div>
-        <div class="content">
-            {{block "tr-index-welcome-content" .}}
-            <p>
-                Welcome to my personal website. I use it to present what i do. It
-                is still in construction.
-            </p>
-            {{end}}
-        </div>
-    </div>
-</section>
-<section>
-    <h2>Site web</h2>
-    <div class="flex-container">
-        <div class="article card">
-            <div class="title">
-                <h2 id="idp" class="anchorable">idp.onl</h2>
-                <div class="timestamp">01/01/2019</div>
-            </div>
-            <div class="picture" style="background-color: #ecedef;">
-                <img src="{{.Base.Static}}/imgs/idp_preview.jpg">
-            </div>
-            <div class="content">
-                {{block "tr-index-idp_onl-content" .}}
-                <div class="badges">
-                    <span class="badge-keyword">django</span>
-                    <span class="badge-keyword">mysql</span>
-                    <span class="badge-keyword">google app engine</span>
+    <div class="article-container">
+        <div class="article">
+            <div class="quote-box">
+                <img class="profile" src="{{.Base.Static}}/imgs/profile.jpg">
+                <div class="text">
+                    <div class="author">vivien</div>
+                    <h1 class="quote">"Hello world !"</h1>
                 </div>
-                <p>
-                    <a href="https://idp.onl">idp.onl</a> is a French group of local artisan. I designed and maintain
-                    their website.
-                </p>
-                {{end}}
-            </div>
-            <div class="footer">
-                <a href="https://idp.onl">{{template "tr-index-see" .}}</a>
-            </div>
-        </div>
-        <div class="article card">
-            <div class="title">
-                <h2 id="lantrechaux" class="anchorable">lantrechaux.com</h2>
-                <div class="timestamp">05/01/2020</div>
-            </div>
-            <div class="picture" style="background-color: white;">
-                <img src="{{.Base.Static}}/imgs/lantrechaux_preview.jpg">
-            </div>
-            <div class="content">
-                {{block "tr-index-lantrechaux-content" .}}
-                <div class="badges">
-                    <span class="badge-keyword">static website</span>
-                    <span class="badge-keyword">ovh</span>
-                </div>
-                <p>
-                    <a href="https://lantrechaux.com">lantrechaux.com</a> is a wedding hall not yet opened. I am
-                    designing
-                    their website, a static webpage is displayed awaiting opening.
-                </p>
-                {{end}}
-            </div>
-            <div class="footer">
-                <a href="https://lantrechaux.com">{{template "tr-index-see" .}}</a>
             </div>
         </div>
     </div>
 </section>
 <section>
-    <h2>Android</h2>
-    <div class="flex-container">
-        <div class="article card">
-            <div class="title">
-                <img src="{{.Base.Static}}/imgs/radius.png">
-                <h2 id="radius" class="anchorable">Radius</h2>
-                <div class="timestamp">12/05/2020</div>
-            </div>
-            <div class="picture" style="background-color: #edece7;">
-                <img src="{{.Base.Static}}/imgs/radius_preview.jpg">
-
-            </div>
+    <div class="article-container">
+        <div class="article">
             <div class="content">
-                {{block "tr-index-radius-content" .}}
-                <div class="badges">
-                    <span class="badge-keyword">android</span>
-                    <span class="badge-keyword">kotlin</span>
-                    <span class="badge-keyword">geofence</span>
-                    <span class="badge-keyword">google maps api</span>
-                </div>
+                {{block "tr-index-welcome-content" .}}
                 <p>
-                    Android application allowing to visualize a geographic radius and to be notified when you
-                    exit it.
-                </p>
-                <p><b>Thanks</b> to <a href="https://www.lemonde.fr/signataires/nicolas-six/">Nicolas Six</a>
-                    for his
-                    <a
-                        href="https://www.lemonde.fr/pixels/article/2020/05/19/deconfinement-trois-outils-recommandables-pour-respecter-la-limite-des-100-kilometres_6040133_4408996.html">article</a>
-                    on <b>lemonde.fr</b> pushing from 10+ to 1000+ users !
-                </p>
-                <p>
-                    <a
-                        href='https://play.google.com/store/apps/details?id=com.vgaluc.radius&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
-                        <img alt='Get it on Google Play'
-                            src='https://play.google.com/intl/en_us/badges/{{.Base.Static}}/images/badges/en_badge_web_generic.png'
-                            height='64px' />
-                    </a>
+                    Welcome to my personal website. I use it to present what i do. It
+                    is still in construction.
                 </p>
                 {{end}}
             </div>
@@ -126,145 +27,16 @@
     </div>
 </section>
 <section>
-    <h2>{{block "tr-index-mini_projects" .}}Mini projects{{end}}</h2>
-    <div class="flex-container">
-        <div class="article card">
-            <div class="title">
-                <h2 id="choose_your_planet" class="anchorable">choose_your_planet</h2>
-                <div class="timestamp">12/05/2020</div>
-            </div>
-            <div class="picture" style="background-color: #0b0505;">
-                <img src="{{.Base.Static}}/imgs/choose_your_planet_preview.jpg">
-            </div>
+    <div class="article-container">
+        <div class="article">
             <div class="content">
-                {{block "tr-index-choose_your_planet-content" .}}
-                <div class="badges">
-                    <span class="badge-keyword">game</span>
-                    <span class="badge-keyword">js</span>
-                    <span class="badge-keyword">physics</span>
-                    <span class="badge-keyword">simulation</span>
+                <div class="call-to-action">
+                    <a href="/portfolio" class="button"><i class="fas fa-book" style="margin-right: .5rem;"></i>
+                        {{block "tr-index-my_work" .}}My
+                        work{{end}}</a>
                 </div>
-                <p>
-                    Random <b>game</b> based on planetary genesis simulation. The goal is to find witch
-                    planet will eat all the others.
-                </p>
-                {{end}}
-            </div>
-            <div class="footer">
-                <a
-                    href="https://viviengaluchot.github.io/choose_your_planet/index.html">{{template "tr-index-live_demo" .}}</a>
-                |
-                <a href="https://github.com/VivienGaluchot/choose_your_planet">code <i
-                        class="fab fa-github-alt"></i></a>
             </div>
         </div>
-        <div class="article card">
-            <div class="title">
-                <h2 id="boids" class="anchorable">boids</h2>
-                <div class="timestamp">12/05/2020</div>
-            </div>
-            <div class="picture" style="background-color: #0b0505;">
-                <img src="{{.Base.Static}}/imgs/boids_preview.jpg">
-            </div>
-            <div class="content">
-                {{block "tr-index-boids-content" .}}
-                <div class="badges">
-                    <span class="badge-keyword">js</span>
-                    <span class="badge-keyword">physics</span>
-                    <span class="badge-keyword">simulation</span>
-                </div>
-                <p>
-                    Javascript (mediocre) implementation of bird flock simulation.
-                </p>
-                {{end}}
-            </div>
-            <div class="footer">
-                <a href="https://viviengaluchot.github.io/boids/index.html">{{template "tr-index-live_demo" .}}</a> |
-                <a href="https://github.com/VivienGaluchot/boids">code <i class="fab fa-github-alt"></i></a>
-            </div>
-        </div>
-        <div class="article card">
-            <div class="title">
-                <h2 id="mindiff_layout" class="anchorable">mindiff_layout</h2>
-                <div class="timestamp">01/05/2020</div>
-            </div>
-            <div class="content">
-                {{block "tr-index-mindiff_layout-content" .}}
-                <div class="badges">
-                    <span class="badge-keyword">js</span>
-                    <span class="badge-keyword">layout</span>
-                </div>
-                <p>Layout of expendable elements with integer size keeping minimal size difference.</p>
-                {{end}}
-            </div>
-            <div class="footer">
-                <a
-                    href="https://viviengaluchot.github.io/mindiff_layout/demo/index.html">{{template "tr-index-live_demo" .}}</a>
-                |
-                <a href="https://github.com/VivienGaluchot/mindiff_layout">code <i class="fab fa-github-alt"></i></a>
-            </div>
-        </div>
-        <div class="article card">
-            <div class="title">
-                <h2 id="fun_with_p5js" class="anchorable">fun_with_p5js</h2>
-                <div class="timestamp">12/05/2020</div>
-            </div>
-            <div class="picture" style="background-color: #f0f0f0;">
-                <img src="{{.Base.Static}}/imgs/fun_with_p5js_preview.jpg">
-            </div>
-            <div class="content">
-                {{block "tr-index-fun_with_p5js-content" .}}
-                <div class="badges">
-                    <span class="badge-keyword">js</span>
-                    <span class="badge-keyword">p5</span>
-                    <span class="badge-keyword">physics</span>
-                    <span class="badge-keyword">simulation</span>
-                </div>
-                <p>
-                    Little tests of the <a href="https://p5js.org/">p5.js</a> library. Implement an automatic
-                    graph node positioning based on spring physics.
-                </p>
-                {{end}}
-            </div>
-            <div class="footer">
-                <a
-                    href="https://viviengaluchot.github.io/fun_with_p5js/index.html">{{template "tr-index-live_demo" .}}</a>
-                |
-                <a href="https://github.com/VivienGaluchot/fun_with_p5js">code <i class="fab fa-github-alt"></i></a>
-            </div>
-        </div>
-    </div>
-</section>
-<section>
-    <div class="article">
-        <div class="title">
-            <h2 id="generic" class="anchorable">{{block "tr-index-the_end-title" .}}The End{{end}}</h2>
-        </div>
-        <div class="content">
-            {{block "tr-index-the_end-content" .}}
-            <p>I made this website with the help of the followings services and technologies:</p>
-            <ul>
-                <li>Design guidelines <a href="https://material.io">material.io</a></li>
-                <li>Icons from <a href="https://fontawesome.com">fontawesome.com</a></li>
-                <li>JS framework <a href="http://vanilla-js.com/">vanilla-js</a></li>
-                <li>Backend <a href="https://golang.org/">Go</a></li>
-                <li>IDE <a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
-                <li>Code versioning <b>git</b> & <a href="http://github.com/">github.com</a></li>
-                <li>Hosting by
-                    <a href="https://cloud.google.com/appengine">Google App Engine</a>
-                </li>
-            </ul>
-            {{end}}
-        </div>
-        <div class="footer">
-            <p>
-                <a href="/">{{template "tr-index-live_demo" .}}
-                    {{block "tr-index-just_in_case" .}}(just in case){{end}}</a> |
-                <a href="https://github.com/VivienGaluchot/vgaluchot-go-srv">code <i class="fab fa-github-alt"></i></a>
-            </p>
-        </div>
-    </div>
-    <div class="article">
     </div>
 </section>
 {{end}}

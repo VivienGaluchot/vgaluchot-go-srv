@@ -23,6 +23,8 @@ func installHandlers(mux *http.ServeMux, serveStatics bool) {
 		{"/", indexView},
 		{"/index", indexView},
 		{"/index.html", indexView},
+		{"/portfolio", portfolioView},
+		{"/portfolio.html", portfolioView},
 		{"/contact", contactView},
 		{"/contact.html", contactView},
 	}
