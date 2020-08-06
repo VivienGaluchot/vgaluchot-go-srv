@@ -1,23 +1,34 @@
 {{define "tr-index-live_demo"}}live demo{{end}}
 {{define "tr-index-see"}}see{{end}}
 
-{{define "content"}}
-<section>
-    <div class="article-container">
-        <div class="article">
-            <div class="title">
-                <h2 id="generic" class="anchorable">Portfolio</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li><a href="#websites">{{block "tr-index-websites" .}}Websites{{end}}</a></li>
-                    <li><a href="#android">Android</a></li>
-                    <li><a href="#mini_projects">{{block "tr-index-mini_projects" .}}Mini projects{{end}}</a></li>
-                </ul>
-            </div>
-        </div>
+
+{{define "header-begin"}}
+<img src="{{.Base.Static}}/imgs/joel-filipe-k8apfKm-Md4-unsplash.jpg">
+{{end}}
+
+{{define "header-end"}}
+<div class="title-block">
+    <h1>Portfolio</h1>
+    <div class="credit">Photo by <a
+            href="https://unsplash.com/@joelfilip?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Joel
+            Filipe</a> on <a
+            href="https://unsplash.com/s/photos/colors?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a>
     </div>
-</section>
+</div>
+{{end}}
+
+{{define "leftbar"}}
+<div class="summary">
+    <ul>
+        <li><a href="#websites">{{block "tr-index-websites" .}}Websites{{end}}</a></li>
+        <li><a href="#android">Android</a></li>
+        <li><a href="#side_projects">{{block "tr-index-side_projects" .}}Side projects{{end}}</a></li>
+        <li><a href="#the_end">{{block "tr-index-the_end" .}}The End{{end}}</a></li>
+    </ul>
+</div>
+{{end}}
+
+{{define "content"}}
 <section>
     <h2 id="websites" class="anchorable">{{template "tr-index-websites" .}}</h2>
     <div class="article-container">
@@ -118,8 +129,36 @@
     </div>
 </section>
 <section>
-    <h2 id="mini_projects" class="anchorable">{{template "tr-index-mini_projects"}}</h2>
+    <h2 id="side_projects" class="anchorable">{{template "tr-index-side_projects"}}</h2>
     <div class="article-container">
+        <div class="article card">
+            <div class="title">
+                <h2 id="tileak" class="anchorable">tileak</h2>
+                <div class="timestamp">06/08/2020</div>
+            </div>
+            <div class="picture" style="background-color: #252423;">
+                <img src="{{.Base.Static}}/imgs/tileak_preview.jpg">
+            </div>
+            <div class="content">
+                {{block "tr-index-tileak-content" .}}
+                <div class="badges">
+                    <span class="badge-keyword">game</span>
+                    <span class="badge-keyword">js</span>
+                    <span class="badge-keyword">multiplayer</span>
+                    <span class="badge-keyword">WebRTC</span>
+                    <span class="badge-keyword">nodejs</span>
+                </div>
+                <p>
+                    Tileak is a tour based, multiplayer strategy game with decentralized logic, almost serverless.
+                </p>
+                {{end}}
+            </div>
+            <div class="footer">
+                <a href="https://tileak.herokuapp.com">{{template "tr-index-live_demo" .}}</a>
+                |
+                <a href="https://github.com/VivienGaluchot/tileak">code <i class="fab fa-github-alt"></i></a>
+            </div>
+        </div>
         <div class="article card">
             <div class="title">
                 <h2 id="choose_your_planet" class="anchorable">choose_your_planet</h2>
@@ -227,12 +266,10 @@
         </div>
     </div>
 </section>
-<section>
+<section class="centered">
+    <h2 id="the_end" class="anchorable">{{template "tr-index-the_end"}}</h2>
     <div class="article-container">
         <div class="article">
-            <div class="title">
-                <h2 id="generic" class="anchorable">{{block "tr-index-the_end-title" .}}The End{{end}}</h2>
-            </div>
             <div class="content">
                 {{block "tr-index-the_end-content" .}}
                 <p>I made this website with the help of the followings services and technologies:</p>

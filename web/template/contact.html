@@ -1,15 +1,27 @@
 {{define "title"}}contact | vgaluchot{{end}}
+
+{{define "header-begin"}}
+<img class="breathing" src="{{.Base.Static}}/imgs/alex-shutin-kKvQJ6rK6S4-unsplash.jpg">
+{{end}}
+
+{{define "header-end"}}
+<div class="title-block">
+    <h1>Contact</h1>
+    <div class="credit">Photo by <a
+            href="https://unsplash.com/@fiveamstories?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Alex
+            Shutin</a> on <a
+            href="https://unsplash.com/s/photos/background?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a>
+    </div>
+</div>
+{{end}}
+
 {{define "content"}}
-<section>
+<section class="centered">
     <div class="article-container">
         <div class="article">
-            <div class="title">
-                <h2 id="contact" class="anchorable">{{block "tr-contact-title" .}}Contact{{end}}</h2>
-            </div>
             <div class="content">
                 {{block "tr-contact-content" .}}
                 <p>You can reach me at <b>contact@vgaluchot.dev</b> for any request.</p>
-                <p><i class="fas fa-broom"></i> WORK IN PROCESS</p>
                 {{end}}
             </div>
         </div>

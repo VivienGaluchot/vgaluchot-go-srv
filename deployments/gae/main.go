@@ -21,6 +21,6 @@ func main() {
 		log.Printf("Defaulting to port %s", port)
 	}
 
-	server.Serve(port, serveStatic)
+	server.Serve(":"+port, serveStatic)
 	log.Fatalln("server.Serve terminated")
 }

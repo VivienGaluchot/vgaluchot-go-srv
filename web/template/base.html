@@ -23,6 +23,7 @@
 <body class="dark">
     <header>
         {{block "header" .}}
+        {{block "header-begin" .}}{{end}}
         <nav>
             <div class="nav-logo">
                 <a href="/">
@@ -66,9 +67,15 @@
             </ul>
         </nav>
         {{end}}
+        {{block "header-end" .}}{{end}}
     </header>
     <content>
-        {{template "content" .}}
+        <div class="left">
+            {{block "leftbar" .}}{{end}}
+        </div>
+        <div class="main">
+            {{template "content" .}}
+        </div>
     </content>
     <footer>
         {{block "footer" .}}

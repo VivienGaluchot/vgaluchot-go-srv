@@ -10,9 +10,9 @@ import (
 func main() {
 	log.Printf("Startup in DEV configuration on version '%s'\n", conf.Version)
 
-	port := "8000"
+	addr := "0.0.0.0:8000"
 	serveStatic := true
 
-	server.Serve(port, serveStatic)
+	server.Serve(addr, serveStatic)
 	log.Fatalln("server.Serve terminated")
 }

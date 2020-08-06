@@ -7,10 +7,10 @@ import (
 
 // Serve the web application forever on the given port.
 // Not expected to terminate.
-func Serve(port string, serveStatics bool) {
+func Serve(addr string, serveStatics bool) {
 	installHandlers(http.DefaultServeMux, serveStatics)
-	log.Printf("Listening on port %s", port)
-	if err := http.ListenAndServe(":"+port, http.DefaultServeMux); err != nil {
+	log.Printf("Listening on %s", addr)
+	if err := http.ListenAndServe(addr, http.DefaultServeMux); err != nil {
 		log.Fatal(err)
 	}
 }
