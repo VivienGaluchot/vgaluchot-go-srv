@@ -446,7 +446,7 @@ nav ul li {
     font-size: .9rem;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 700px) {
     .summary {
         display: none;
     }
@@ -516,6 +516,7 @@ section>h2 {
     border-radius: .3rem;
     overflow: hidden;
     border: 1px solid var(--primary-dark);
+    max-width: 66ch;
 }
 
 .article .title {
