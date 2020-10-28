@@ -43,6 +43,8 @@ info "[$0]"
 )
 if [ $? == 0 ] ; then
     info "[$0 OK]"
+    exit 0
 else
     error "[$0 FAILED]"
+    exit 1
 fi
