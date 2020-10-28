@@ -237,7 +237,7 @@ header>img {
     left: 0;
     width: 100%;
     height: 100%;
-    filter: brightness(.8);
+    filter: brightness(.5);
 }
 
 header>:not(img) {
@@ -407,7 +407,7 @@ nav ul li {
 }
 
 .title-block h1 {
-    margin: 5rem 0;
+    margin: 2rem 0 3rem 0;
     padding: 1rem;
     display: inline-block;
 }
@@ -421,7 +421,7 @@ nav ul li {
 /* summary */
 
 .summary {
-    padding: .5rem;
+    padding: .6rem;
     position: sticky;
     top: 1rem;
     border-right: 2px solid #ffffff22;
