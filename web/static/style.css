@@ -282,7 +282,7 @@ nav ul li {
     padding: .5rem;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 400px) {
     .nav-link>a {
         padding: .5rem .2rem;
     }
@@ -643,6 +643,8 @@ section>h2 {
 
 footer {
     background-color: #00000030;
+    --color: #FFFFFF80;
+    color: var(--color);
 }
 
 footer>* {
@@ -653,16 +655,15 @@ footer .share {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    font-size: 1.2rem;
-    line-height: 1.2rem;
+    font-size: .8rem;
 }
 
 footer .share>* {
-    padding: .6rem;
+    padding: .3rem;
+    margin: .3rem;
 }
 
 footer .version {
-    opacity: .5;
     font-size: .7rem;
     font-family: 'Roboto Mono', monospace;
     display: inline-block;

@@ -37,17 +37,17 @@
             </div>
             <ul>
                 <li class="nav-link">
-                    <a href="/" class="{{if (eq .Base.TemplateName "index.html") }}active{{end}}">
+                    <a href="/" class="{{if (eq .Base.TemplateName " index.html") }}active{{end}}">
                         {{block "tr-base-me" .}}Me{{end}}
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="/portfolio" class="{{if (eq .Base.TemplateName "portfolio.html") }}active{{end}}">
+                    <a href="/portfolio" class="{{if (eq .Base.TemplateName " portfolio.html") }}active{{end}}">
                         {{block "tr-base-portfolio" .}}Portfolio{{end}}
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="/contact" class="{{if (eq .Base.TemplateName "contact.html") }}active{{end}}">
+                    <a href="/contact" class="{{if (eq .Base.TemplateName " contact.html") }}active{{end}}">
                         {{block "tr-base-contact" .}}Contact{{end}}
                     </a>
                 </li>
@@ -80,9 +80,9 @@
     <footer>
         {{block "footer" .}}
         <div class="share">
-            <a href="/contact"><i class="fas fa-comments"></i></a>
-            <a href="https://github.com/VivienGaluchot"><i class="fab fa-github-alt"></i></a>
-            <a href="https://www.linkedin.com/in/vivien-galuchot"><i class="fab fa-linkedin-in"></i></a>
+            <a href="/contact"><i class="fas fa-comments"></i> Contact</a>
+            <a href="https://github.com/VivienGaluchot"><i class="fab fa-github-alt"></i> GitHub</a>
+            <a href="https://www.linkedin.com/in/vivien-galuchot"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
         </div>
         <div>
             <a href="https://github.com/VivienGaluchot/vgaluchot-go-srv" class="version">
