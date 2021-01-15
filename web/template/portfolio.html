@@ -20,9 +20,27 @@
 {{define "leftbar"}}
 <div class="summary">
     <ul>
-        <li><a href="#web_app">{{block "tr-index-web_app" .}}Web app{{end}}</a></li>
-        <li><a href="#android_app">{{block "tr-index-android_app" .}}Android app{{end}}</a></li>
-        <li><a href="#experiment">{{block "tr-index-experiment" .}}Experiment{{end}}</a></li>
+        <li>
+            <a href="#web_app">{{block "tr-index-web_app" .}}Web app{{end}}</a>
+            <ul>
+                <li><a href="#tileak">tileak</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#android_app">{{block "tr-index-android_app" .}}Android app{{end}}</a>
+            <ul>
+                <li><a href="#radius">Radius</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#experiment">{{block "tr-index-experiment" .}}Experiment{{end}}</a>
+            <ul>
+                <li><a href="#choose_your_planet">choose_your_planet</a></li>
+                <li><a href="#boids">boids</a></li>
+                <li><a href="#mindiff_layout">mindiff_layout</a></li>
+                <li><a href="#fun_with_p5js">fun_with_p5js</a></li>
+            </ul>
+        </li>
     </ul>
 </div>
 {{end}}
