@@ -2,33 +2,31 @@
 {{define "tr-index-see"}}voir{{end}}
 {{define "tr-index-just_in_case"}}(au cas ou...){{end}}
 
-{{define "tr-index-websites"}}Sites web{{end}}
+<!-- titles -->
+
+{{define "tr-index-web_app"}}Web application{{end}}
+{{define "tr-index-android_app"}}Application Android{{end}}
+{{define "tr-index-experiment"}}Expérimentation{{end}}
 
 
-{{define "tr-index-idp_onl-content"}}
+<!-- web_app -->
+
+{{define "tr-index-tileak-content"}}
 <div class="badges">
-    <span class="badge-keyword">django</span>
-    <span class="badge-keyword">mysql</span>
-    <span class="badge-keyword">google app engine</span>
+    <span class="badge-keyword">jeux</span>
+    <span class="badge-keyword">js</span>
+    <span class="badge-keyword">multijoueur</span>
+    <span class="badge-keyword">WebRTC</span>
+    <span class="badge-keyword">nodejs</span>
 </div>
 <p>
-    <a href="https://idp.onl">idp.onl</a> est un groupement d'artisans local. J'ai conçu et réalise la maintenance de
-    leur site web.
+    Jeux multijoueur minimal tour par tour. Maquette d'essai utilisant la technologie WebRTC pour créer un jeu
+    entièrement décentralisée.
 </p>
 {{end}}
 
 
-{{block "tr-index-lantrechaux-content" .}}
-<div class="badges">
-    <span class="badge-keyword">site statique</span>
-    <span class="badge-keyword">ovh</span>
-</div>
-<p>
-    <a href="https://lantrechaux.com">lantrechaux.com</a> est une salle de mariage pas encore ouverte. Je suis en charge
-    de concevoir leur site, une page web statique est affichée en attendant.
-</p>
-{{end}}
-
+<!-- android_app -->
 
 {{define "tr-index-radius-content"}}
 <div class="badges">
@@ -57,23 +55,7 @@
 {{end}}
 
 
-{{define "tr-index-side_projects"}}Side projects{{end}}
-
-
-{{define "tr-index-tileak-content"}}
-<div class="badges">
-    <span class="badge-keyword">jeux</span>
-    <span class="badge-keyword">js</span>
-    <span class="badge-keyword">multijoueur</span>
-    <span class="badge-keyword">WebRTC</span>
-    <span class="badge-keyword">nodejs</span>
-</div>
-<p>
-    Jeux multijoueur minimal tour par tour. Maquette d'essai utilisant la technologie WebRTC pour créer un jeu
-    entièrement décentralisée.
-</p>
-{{end}}
-
+<!-- experiment -->
 
 {{define "tr-index-choose_your_planet-content"}}
 <div class="badges">
@@ -122,23 +104,4 @@
     Essais de la librairie <a href="https://p5js.org/">p5.js</a>. Implémentation d'un positionnement automatique de
     noeuds de graphe basé sur la physique des ressorts.
 </p>
-{{end}}
-
-
-{{define "tr-index-the_end"}}Générique{{end}}
-
-
-{{define "tr-index-the_end-content"}}
-<p>J'ai réalisé ce site avec l'aide des services et technologies suivants :</p>
-<ul>
-    <li>Directives graphique <a href="https://material.io">material.io</a></li>
-    <li>Icônes de <a href="https://fontawesome.com">fontawesome.com</a></li>
-    <li>JS framework <a href="http://vanilla-js.com/">vanilla-js</a></li>
-    <li>Backend <a href="https://golang.org/">Go</a></li>
-    <li>IDE <a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
-    <li>Versionnage de code <b>git</b> & <a href="http://github.com/">github.com</a></li>
-    <li>Hébergement par
-        <a href="https://cloud.google.com/appengine">Google App Engine</a>
-    </li>
-</ul>
 {{end}}

@@ -358,6 +358,7 @@ nav ul li {
     flex-wrap: wrap;
     text-align: left;
     align-items: center;
+    justify-content: center;
 }
 
 .quote-box>* {
@@ -391,7 +392,7 @@ nav ul li {
     font-size: 1.5rem;
     border-radius: 0 1.2rem 1.2rem 1.2rem;
     padding: 1rem;
-    border: 2px solid var(--color);
+    border: 1px solid var(--color);
 }
 
 @media (max-width: 600px) {
@@ -446,7 +447,7 @@ nav ul li {
     font-size: .9rem;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     .summary {
         display: none;
     }

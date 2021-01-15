@@ -20,72 +20,50 @@
 {{define "leftbar"}}
 <div class="summary">
     <ul>
-        <li><a href="#websites">{{block "tr-index-websites" .}}Websites{{end}}</a></li>
-        <li><a href="#android">Android</a></li>
-        <li><a href="#side_projects">{{block "tr-index-side_projects" .}}Side projects{{end}}</a></li>
-        <li><a href="#the_end">{{block "tr-index-the_end" .}}The End{{end}}</a></li>
+        <li><a href="#web_app">{{block "tr-index-web_app" .}}Web app{{end}}</a></li>
+        <li><a href="#android_app">{{block "tr-index-android_app" .}}Android app{{end}}</a></li>
+        <li><a href="#experiment">{{block "tr-index-experiment" .}}Experiment{{end}}</a></li>
     </ul>
 </div>
 {{end}}
 
 {{define "content"}}
 <section>
-    <h2 id="websites" class="anchorable">{{template "tr-index-websites" .}}</h2>
+    <h2 id="web_app" class="anchorable">{{template "tr-index-web_app"}}</h2>
     <div class="article-container">
         <div class="article card">
             <div class="title">
-                <h2 id="idp" class="anchorable">idp.onl</h2>
-                <div class="timestamp">01/01/2019</div>
+                <h2 id="tileak" class="anchorable">tileak</h2>
+                <div class="timestamp">06/08/2020</div>
             </div>
-            <div class="picture" style="background-color: #ecedef;">
-                <img src="{{.Base.Static}}/imgs/idp_preview.jpg">
+            <div class="picture" style="background-color: #252423;">
+                <img src="{{.Base.Static}}/imgs/tileak_preview.jpg">
             </div>
             <div class="content">
-                {{block "tr-index-idp_onl-content" .}}
+                {{block "tr-index-tileak-content" .}}
                 <div class="badges">
-                    <span class="badge-keyword">django</span>
-                    <span class="badge-keyword">mysql</span>
-                    <span class="badge-keyword">google app engine</span>
+                    <span class="badge-keyword">game</span>
+                    <span class="badge-keyword">js</span>
+                    <span class="badge-keyword">multiplayer</span>
+                    <span class="badge-keyword">WebRTC</span>
+                    <span class="badge-keyword">nodejs</span>
                 </div>
                 <p>
-                    <a href="https://idp.onl">idp.onl</a> is a French group of local artisan. I designed and maintain
-                    their website.
+                    Tileak is a tour based, multiplayer strategy game with decentralized logic, almost serverless.
                 </p>
                 {{end}}
             </div>
             <div class="footer">
-                <a href="https://idp.onl">{{template "tr-index-see" .}}</a>
-            </div>
-        </div>
-        <div class="article card">
-            <div class="title">
-                <h2 id="lantrechaux" class="anchorable">lantrechaux.com</h2>
-                <div class="timestamp">05/01/2020</div>
-            </div>
-            <div class="picture" style="background-color: white;">
-                <img src="{{.Base.Static}}/imgs/lantrechaux_preview.jpg">
-            </div>
-            <div class="content">
-                {{block "tr-index-lantrechaux-content" .}}
-                <div class="badges">
-                    <span class="badge-keyword">static website</span>
-                    <span class="badge-keyword">ovh</span>
-                </div>
-                <p>
-                    <a href="https://lantrechaux.com">lantrechaux.com</a> is a wedding hall not yet opened. I am
-                    designing
-                    their website, a static webpage is displayed awaiting opening.
-                </p>
-                {{end}}
-            </div>
-            <div class="footer">
-                <a href="https://lantrechaux.com">{{template "tr-index-see" .}}</a>
+                <a href="https://tileak.herokuapp.com">{{template "tr-index-live_demo" .}}</a>
+                |
+                <a href="https://github.com/VivienGaluchot/tileak">code <i class="fab fa-github-alt"></i></a>
             </div>
         </div>
     </div>
 </section>
+
 <section>
-    <h2 id="android" class="anchorable">Android</h2>
+    <h2 id="android_app" class="anchorable">{{template "tr-index-android_app"}}</h2>
     <div class="article-container">
         <div class="article card">
             <div class="title">
@@ -128,37 +106,10 @@
         </div>
     </div>
 </section>
+
 <section>
-    <h2 id="side_projects" class="anchorable">{{template "tr-index-side_projects"}}</h2>
+    <h2 id="experiment" class="anchorable">{{template "tr-index-experiment"}}</h2>
     <div class="article-container">
-        <div class="article card">
-            <div class="title">
-                <h2 id="tileak" class="anchorable">tileak</h2>
-                <div class="timestamp">06/08/2020</div>
-            </div>
-            <div class="picture" style="background-color: #252423;">
-                <img src="{{.Base.Static}}/imgs/tileak_preview.jpg">
-            </div>
-            <div class="content">
-                {{block "tr-index-tileak-content" .}}
-                <div class="badges">
-                    <span class="badge-keyword">game</span>
-                    <span class="badge-keyword">js</span>
-                    <span class="badge-keyword">multiplayer</span>
-                    <span class="badge-keyword">WebRTC</span>
-                    <span class="badge-keyword">nodejs</span>
-                </div>
-                <p>
-                    Tileak is a tour based, multiplayer strategy game with decentralized logic, almost serverless.
-                </p>
-                {{end}}
-            </div>
-            <div class="footer">
-                <a href="https://tileak.herokuapp.com">{{template "tr-index-live_demo" .}}</a>
-                |
-                <a href="https://github.com/VivienGaluchot/tileak">code <i class="fab fa-github-alt"></i></a>
-            </div>
-        </div>
         <div class="article card">
             <div class="title">
                 <h2 id="choose_your_planet" class="anchorable">choose_your_planet</h2>
@@ -182,9 +133,8 @@
                 {{end}}
             </div>
             <div class="footer">
-                <a
-                    href="https://viviengaluchot.github.io/choose_your_planet/index.html">{{template "tr-index-live_demo" .}}</a>
-                |
+                <a href="https://viviengaluchot.github.io/choose_your_planet/index.html">
+                    {{template "tr-index-live_demo" .}}</a> |
                 <a href="https://github.com/VivienGaluchot/choose_your_planet">code <i
                         class="fab fa-github-alt"></i></a>
             </div>
@@ -229,9 +179,8 @@
                 {{end}}
             </div>
             <div class="footer">
-                <a
-                    href="https://viviengaluchot.github.io/mindiff_layout/demo/index.html">{{template "tr-index-live_demo" .}}</a>
-                |
+                <a href="https://viviengaluchot.github.io/mindiff_layout/demo/index.html">
+                    {{template "tr-index-live_demo" .}}</a> |
                 <a href="https://github.com/VivienGaluchot/mindiff_layout">code <i class="fab fa-github-alt"></i></a>
             </div>
         </div>
@@ -258,41 +207,9 @@
                 {{end}}
             </div>
             <div class="footer">
-                <a
-                    href="https://viviengaluchot.github.io/fun_with_p5js/index.html">{{template "tr-index-live_demo" .}}</a>
-                |
+                <a href="https://viviengaluchot.github.io/fun_with_p5js/index.html">
+                    {{template "tr-index-live_demo" .}}</a> |
                 <a href="https://github.com/VivienGaluchot/fun_with_p5js">code <i class="fab fa-github-alt"></i></a>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="centered">
-    <h2 id="the_end" class="anchorable">{{template "tr-index-the_end"}}</h2>
-    <div class="article-container">
-        <div class="article">
-            <div class="content">
-                {{block "tr-index-the_end-content" .}}
-                <p>I made this website with the help of the followings services and technologies:</p>
-                <ul>
-                    <li>Design guidelines <a href="https://material.io">material.io</a></li>
-                    <li>Icons from <a href="https://fontawesome.com">fontawesome.com</a></li>
-                    <li>JS framework <a href="http://vanilla-js.com/">vanilla-js</a></li>
-                    <li>Backend <a href="https://golang.org/">Go</a></li>
-                    <li>IDE <a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
-                    <li>Code versioning <b>git</b> & <a href="http://github.com/">github.com</a></li>
-                    <li>Hosting by
-                        <a href="https://cloud.google.com/appengine">Google App Engine</a>
-                    </li>
-                </ul>
-                {{end}}
-            </div>
-            <div class="footer">
-                <p>
-                    <a href="/">{{template "tr-index-live_demo" .}}
-                        {{block "tr-index-just_in_case" .}}(just in case){{end}}</a> |
-                    <a href="https://github.com/VivienGaluchot/vgaluchot-go-srv">code <i
-                            class="fab fa-github-alt"></i></a>
-                </p>
             </div>
         </div>
     </div>
