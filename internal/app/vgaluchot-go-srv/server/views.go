@@ -67,12 +67,12 @@ var portfolioView func(w http.ResponseWriter, r *http.Request) = makeTemplateHan
 func get404Context(processingCtx TemplateProcessingCtx) interface{} {
 	type Context struct {
 		ErrorCode string
-		ErrorUrl  string
+		ErrorURL  string
 		Base      interface{}
 	}
 	data := Context{
 		ErrorCode: "404",
-		ErrorUrl:  processingCtx.request.URL.Path,
+		ErrorURL:  processingCtx.request.URL.Path,
 		Base:      getBaseContext(processingCtx),
 	}
 	return data
