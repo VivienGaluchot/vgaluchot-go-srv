@@ -16,26 +16,24 @@ func Serve(addr string, serveStatics bool) {
 }
 
 func installHandlers(mux *http.ServeMux, serveStatics bool) {
+	if serveStatics {
+		staticHandler := http.StripPrefix("/static", http.FileServer(http.Dir("static")))
+		mux.Handle("/static/", staticHandler)
+	}
+
 	views := []struct {
 		url     string
 		handler func(w http.ResponseWriter, r *http.Request)
 	}{
 		{"/", indexView},
-		{"/index", indexView},
 		{"/index.html", indexView},
+		{"/index", indexView},
 		{"/portfolio", portfolioView},
 		{"/portfolio.html", portfolioView},
-		{"/contact", contactView},
-		{"/contact.html", contactView},
 	}
 	for _, it := range views {
 		handler := makeGetExactURLHandler(it.url, it.handler)
 		mux.HandleFunc(it.url, handler)
-	}
-
-	if serveStatics {
-		staticHandler := http.StripPrefix("/static", http.FileServer(http.Dir("static")))
-		mux.Handle("/static/", staticHandler)
 	}
 }
 
@@ -46,7 +44,8 @@ func installHandlers(mux *http.ServeMux, serveStatics bool) {
 func makeGetExactURLHandler(url string, next func(http.ResponseWriter, *http.Request)) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != url {
-			http.NotFound(w, r)
+			w.WriteHeader(404)
+			error404View(w, r)
 			return
 		}
 		if r.Method != "GET" {

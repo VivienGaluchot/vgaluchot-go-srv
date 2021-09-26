@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{block "title" .}}vgaluchot{{end}}</title>
+    <title>{{block "title" .}}Vivien Galuchot{{end}}</title>
     <link rel="icon" href="{{.Base.Static}}/icon.svg">
 
     {{block "css" .}}
@@ -24,63 +24,54 @@
     <header>
         {{block "header" .}}
         {{block "header-begin" .}}{{end}}
-        <nav>
-            <div class="nav-logo">
-                <a href="/">
-                    <div class="logo"></div>
-                    <div class="logo-next">
-                        <div class="title">Vivien Galuchot</div>
-                        <div class="subtitle">{{block "tr-base-subtitle" .}}Software engineer{{end}}
+        <div class="wmaxed">
+            <nav>
+                <div class="nav-logo">
+                    <a href="/">
+                        <div class="logo"></div>
+                        <div class="logo-next">
+                            <div class="title">Vivien Galuchot</div>
+                            <div class="subtitle">{{block "tr-base-subtitle" .}}Software engineer{{end}}
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <ul>
-                <li class="nav-link">
-                    <a href="/" class="{{if (eq .Base.TemplateName " index.html") }}active{{end}}">
-                        {{block "tr-base-me" .}}Me{{end}}
                     </a>
-                </li>
-                <li class="nav-link">
-                    <a href="/portfolio" class="{{if (eq .Base.TemplateName " portfolio.html") }}active{{end}}">
-                        {{block "tr-base-portfolio" .}}Portfolio{{end}}
-                    </a>
-                </li>
-                <li class="nav-link">
-                    <a href="/contact" class="{{if (eq .Base.TemplateName " contact.html") }}active{{end}}">
-                        {{block "tr-base-contact" .}}Contact{{end}}
-                    </a>
-                </li>
-                <li class="nav-box">|</li>
-                {{if (ne .Base.Client.Lang "fr") }}
-                <li class="nav-link">
-                    <a href="#" class="language-switch" onclick="local.switchLanguage('fr'); return false;">
-                        <img src="{{.Base.Static}}/lang-fr.svg"> fr</a>
-                </li>
-                {{ end }}
-                {{if (ne .Base.Client.Lang "en") }}
-                <li class="nav-link">
-                    <a href="#" class="language-switch" onclick="local.switchLanguage('en'); return false;">
-                        <img src="{{.Base.Static}}/lang-en.svg"> en</a>
-                </li>
-                {{ end }}
-            </ul>
-        </nav>
-        {{end}}
-        {{block "header-end" .}}{{end}}
+                </div>
+                <ul>
+                    <li class="nav-link">
+                        <a href="/" class="{{if (eq .Base.TemplateName "index.html") }}active{{end}}">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="/portfolio" class="{{if (eq .Base.TemplateName "portfolio.html") }}active{{end}}">
+                            <i class="fas fa-flask"></i>
+                        </a>
+                    </li>
+                    <li class="nav-box">|</li>
+                    {{if (ne .Base.Client.Lang "fr") }}
+                    <li class="nav-link">
+                        <a href="#" class="language-switch" onclick="local.switchLanguage('fr'); return false;">
+                            <img src="{{.Base.Static}}/lang-fr.svg"> fr</a>
+                    </li>
+                    {{ end }}
+                    {{if (ne .Base.Client.Lang "en") }}
+                    <li class="nav-link">
+                        <a href="#" class="language-switch" onclick="local.switchLanguage('en'); return false;">
+                            <img src="{{.Base.Static}}/lang-en.svg"> en</a>
+                    </li>
+                    {{ end }}
+                </ul>
+            </nav>
+            {{end}}
+            {{block "header-end" .}}{{end}}
+        </div>
     </header>
-    <content>
-        <div class="left">
-            {{block "leftbar" .}}{{end}}
-        </div>
-        <div class="main">
-            {{template "content" .}}
-        </div>
+    <content class="wmaxed">
+        {{template "content" .}}
     </content>
     <footer>
         {{block "footer" .}}
         <div class="share">
-            <a href="/contact"><i class="fas fa-comments"></i> Contact</a>
             <a href="https://github.com/VivienGaluchot"><i class="fab fa-github-alt"></i> GitHub</a>
             <a href="https://www.linkedin.com/in/vivien-galuchot"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
         </div>

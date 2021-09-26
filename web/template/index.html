@@ -1,41 +1,40 @@
 {{define "content"}}
-<section class="centered">
-    <div class="article-container">
-        <div class="article">
-            <div class="quote-box">
-                <!-- <img class="profile" src="{{.Base.Static}}/imgs/profile.jpg"> -->
-                <div class="text">
-                    <!-- <div class="author">vivien</div> -->
-                    <h1 class="quote">"Hello world !"</h1>
+<div class="main">
+    <section class="centered">
+        <div class="article-container">
+            <div class="article">
+                <div class="quote-box">
+                    <i class="profile fas fa-user-circle"></i>
+                    <div class="text">
+                        <!-- <div class="author"><i class="far fa-user-circle"></i></div> -->
+                        <h1 class="quote">"Hello world !"</h1>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="centered">
-    <div class="article-container">
-        <div class="article">
-            <div class="content">
-                {{block "tr-index-welcome-content" .}}
-                <p>
-                    Welcome to my personal website.
-                </p>
-                {{end}}
-            </div>
-        </div>
-    </div>
-</section>
-<section class="centered">
-    <div class="article-container">
-        <div class="article">
-            <div class="content">
-                <div class="call-to-action">
-                    <a href="/portfolio" class="button"><i class="fas fa-book" style="margin-right: .5rem;"></i>
-                        {{block "tr-index-my_work" .}}My
-                        work{{end}}</a>
+    </section>
+    <section class="centered">
+        <div class="article-container">
+            <div class="article">
+                <div class="content">
+                    {{block "tr-index-welcome-content" .}}
+                    <p>
+                        Hello, I'm Vivien Galuchot, independent software engineer.
+                        Welcome on my personal website.
+                    </p>
+                    <div class="p-spacer"></div>
+                    <p>
+                        I'm specialized in critical embedded systems. I'm also interested in web and mobile application domains. 
+                        This website is presenting <a href="/portfolio">some of my works</a> on this topic.
+                    </p>
+                    <div class="p-spacer"></div>
+                    <p>
+                        For any request, reach me at <code id="mail">contact@vgaluchot.dev</code> <button class="btn-copy transparent" data-target="#mail"><i class="far fa-copy"></i> copy</button>
+                    </p>
+                    {{end}}
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 {{end}}

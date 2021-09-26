@@ -53,6 +53,25 @@ const local = (() => {
         switchLanguage(lang) {
             setCookie('lang', lang, 30);
             window.location.reload();
+        },
+
+        installCopy(button) {
+            button.onclick = () => {
+                let selector = button.dataset["target"];
+                let selected = document.querySelector(selector);
+                let resCls = null;
+                try {
+                    navigator.clipboard.writeText(selected.textContent);
+                    resCls = "success";
+                } catch (err) {
+                    console.exception(err);
+                    resCls = "error";
+                }
+                selected.classList.add(resCls);
+                setTimeout(() => {
+                    selected.classList.remove(resCls);
+                }, 1000);
+            }
         }
     };
 })();
@@ -64,5 +83,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     for (let el of document.getElementsByClassName("anchorable")) {
         local.installAnchor(el);
+    }
+
+    for (let el of document.getElementsByClassName("btn-copy")) {
+        local.installCopy(el);
     }
 });

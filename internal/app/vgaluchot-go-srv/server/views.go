@@ -62,16 +62,20 @@ func getPortfolioContext(processingCtx TemplateProcessingCtx) interface{} {
 
 var portfolioView func(w http.ResponseWriter, r *http.Request) = makeTemplateHandler("portfolio.html", getPortfolioContext)
 
-// contact
+// 404
 
-func getContactContext(processingCtx TemplateProcessingCtx) interface{} {
+func get404Context(processingCtx TemplateProcessingCtx) interface{} {
 	type Context struct {
-		Base interface{}
+		ErrorCode string
+		ErrorUrl  string
+		Base      interface{}
 	}
 	data := Context{
-		Base: getBaseContext(processingCtx),
+		ErrorCode: "404",
+		ErrorUrl:  processingCtx.request.URL.Path,
+		Base:      getBaseContext(processingCtx),
 	}
 	return data
 }
 
-var contactView func(w http.ResponseWriter, r *http.Request) = makeTemplateHandler("contact.html", getContactContext)
+var error404View func(w http.ResponseWriter, r *http.Request) = makeTemplateHandler("404.html", get404Context)

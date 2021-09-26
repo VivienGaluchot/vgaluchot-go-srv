@@ -47,8 +47,6 @@ func TestInstallHandlers(t *testing.T) {
 		{"/index.html", 200},
 		{"/portfolio", 200},
 		{"/portfolio.html", 200},
-		{"/contact", 200},
-		{"/contact.html", 200},
 		{"/xxxxxx", 404},
 	}
 

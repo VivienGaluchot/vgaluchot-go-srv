@@ -8,7 +8,7 @@
 
 {{define "header-end"}}
 <div class="title-block">
-    <h1>Portfolio</h1>
+    <h1>{{block "tr-page-title" .}}Side projects{{end}}</h1>
     <div class="credit">Photo by <a
             href="https://unsplash.com/@joelfilip?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Joel
             Filipe</a> on <a
@@ -17,8 +17,18 @@
 </div>
 {{end}}
 
+{{define "content"}}
+<div class="left">
+    {{block "leftbar" .}}{{end}}
+</div>
+<div class="main right">
+    {{template "mainbar" .}}
+</div>
+{{end}}
+
 {{define "leftbar"}}
 <div class="summary">
+    <h3>{{block "tr-index-title" .}}Summary{{end}}</h3>
     <ul>
         <li>
             <a href="#web_app">{{block "tr-index-web_app" .}}Web app{{end}}</a>
@@ -45,41 +55,7 @@
 </div>
 {{end}}
 
-{{define "content"}}
-<section>
-    <h2 id="web_app" class="anchorable">{{template "tr-index-web_app"}}</h2>
-    <div class="article-container">
-        <div class="article card">
-            <div class="title">
-                <h2 id="tileak" class="anchorable">tileak</h2>
-                <div class="timestamp">06/08/2020</div>
-            </div>
-            <div class="picture" style="background-color: #252423;">
-                <img src="{{.Base.Static}}/imgs/tileak_preview.jpg">
-            </div>
-            <div class="content">
-                {{block "tr-index-tileak-content" .}}
-                <div class="badges">
-                    <span class="badge-keyword">game</span>
-                    <span class="badge-keyword">js</span>
-                    <span class="badge-keyword">multiplayer</span>
-                    <span class="badge-keyword">WebRTC</span>
-                    <span class="badge-keyword">nodejs</span>
-                </div>
-                <p>
-                    Tileak is a tour based, multiplayer strategy game with decentralized logic, almost serverless.
-                </p>
-                {{end}}
-            </div>
-            <div class="footer">
-                <a href="https://tileak.herokuapp.com">{{template "tr-index-live_demo" .}}</a>
-                |
-                <a href="https://github.com/VivienGaluchot/tileak">code <i class="fab fa-github-alt"></i></a>
-            </div>
-        </div>
-    </div>
-</section>
-
+{{define "mainbar"}}
 <section>
     <h2 id="android_app" class="anchorable">{{template "tr-index-android_app"}}</h2>
     <div class="article-container">
@@ -120,6 +96,40 @@
                     </a>
                 </p>
                 {{end}}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2 id="web_app" class="anchorable">{{template "tr-index-web_app"}}</h2>
+    <div class="article-container">
+        <div class="article card">
+            <div class="title">
+                <h2 id="tileak" class="anchorable">tileak</h2>
+                <div class="timestamp">06/08/2020</div>
+            </div>
+            <div class="picture" style="background-color: #252423;">
+                <img src="{{.Base.Static}}/imgs/tileak_preview.jpg">
+            </div>
+            <div class="content">
+                {{block "tr-index-tileak-content" .}}
+                <div class="badges">
+                    <span class="badge-keyword">game</span>
+                    <span class="badge-keyword">js</span>
+                    <span class="badge-keyword">multiplayer</span>
+                    <span class="badge-keyword">WebRTC</span>
+                    <span class="badge-keyword">nodejs</span>
+                </div>
+                <p>
+                    Tileak is a tour based, multiplayer strategy game with decentralized logic, almost serverless.
+                </p>
+                {{end}}
+            </div>
+            <div class="footer">
+                <a href="https://tileak.herokuapp.com">{{template "tr-index-live_demo" .}}</a>
+                |
+                <a href="https://github.com/VivienGaluchot/tileak">code <i class="fab fa-github-alt"></i></a>
             </div>
         </div>
     </div>

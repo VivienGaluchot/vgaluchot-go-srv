@@ -2,13 +2,13 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     /**/
-    --primary: #202020;
+    --primary: #26292e;
     --primary-text: #e0e0e0;
     /**/
-    --primary-light: #353535;
+    --primary-light: #f0f0f021;
     --primary-light-text: #f0f0f0;
     /**/
-    --primary-dark: #101010;
+    --primary-dark: #101010cc;
     --primary-dark-text: #ffffff;
     /**/
     --secondary: #d3e057;
@@ -21,7 +21,7 @@
     --secondary-dark-text: #000000;
     /**/
     --a-color: rgb(81, 168, 255);
-    --a-shade-color: rgba(81, 168, 255, 0.2);
+    --a-shade-color: rgba(81, 168, 255, 0.15);
 }
 
 /* default */
@@ -50,11 +50,24 @@ pre {
 
 code {
     font-family: 'Roboto Mono', monospace;
-    color: orangered;
     font-weight: 500;
     display: inline-block;
-    background-color: rgba(255, 68, 0, 0.1);
-    padding: 0 .2rem;
+    color: rgb(81, 168, 255);
+    background-color: rgba(81, 168, 255, 0.09);
+    border-radius: .4rem;
+    font-size: 1rem;
+    padding: .4rem;
+    line-height: 1rem;
+}
+
+code.success {
+    color: rgb(81, 255, 96);
+    background-color: rgba(81, 255, 96, 0.09);
+}
+
+code.error {
+    color: rgb(255, 122, 81);
+    background-color: rgba(255, 122, 81, 0.09);
 }
 
 pre code {
@@ -93,16 +106,19 @@ hr {
 
 /* main blocks */
 
-html, body {
+html {
     --color: var(--primary-text);
     --background-color: var(--primary);
-    color: var(--color);
     background-color: var(--background-color);
+    color: var(--color);
     height: 100%;
     margin: 0;
 }
 
 body {
+    overflow: auto;
+    margin: 0;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -111,12 +127,10 @@ header {
     --color: var(--primary-dark-text);
     --background-color: var(--primary-dark);
     color: var(--color);
-    background-color: var(--background-color);
     /**/
     --color: var(--primary-text);
     --background-color: var(--primary);
     color: var(--color);
-    background-color: var(--background-color);
     /**/
     --a-color: var(--color);
     --a-shade-color: rgba(255, 255, 255, 0.1);
@@ -126,7 +140,6 @@ content {
     --color: var(--primary-text);
     --background-color: var(--primary);
     color: var(--color);
-    background-color: var(--background-color);
 }
 
 footer {
@@ -165,11 +178,18 @@ content {
 
 content>.left {
     flex-shrink: 0;
-    background-color: #00000022;
+    display: flex;
+    justify-content: end;
+    align-items: start;
+}
+
+content>.right {
+    border-left: 1px solid rgba(0, 0, 0, .2);
+    border-right: 1px solid rgba(0, 0, 0, .2);
+    background-color: rgba(255, 255, 255, 0.02);
 }
 
 content>.main {
-    max-width: 2000px;
     flex-grow: 1;
     padding: 1.5rem 6rem;
     margin: 0 auto;
@@ -187,6 +207,12 @@ content>.main {
     }
 }
 
+.wmaxed {
+    max-width: 1600px;
+    margin: auto;
+    width: 100%;
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
@@ -199,11 +225,17 @@ p {
     max-width: 66ch;
 }
 
+.p-spacer {
+    height: 1rem;
+    display: block;
+}
+
 b {
     font-weight: 700;
 }
 
 a {
+    border-radius: .1rem;
     display: inline-block;
     color: var(--a-color);
     font-weight: 400;
@@ -212,13 +244,11 @@ a {
 }
 
 a:hover, a:focus {
-    border-radius: .1rem;
     background-color: var(--a-shade-color);
     box-shadow: 0 0 0 .2rem var(--a-shade-color);
 }
 
 a:active {
-    border-radius: .1rem;
     background-color: var(--a-shade-color);
     box-shadow: none;
 }
@@ -289,7 +319,7 @@ nav ul li {
 }
 
 .nav-link>a.active {
-    font-weight: 500;
+    border-bottom: 1px solid white;
 }
 
 .nav-box {
@@ -360,7 +390,7 @@ nav ul li {
     display: flex;
     flex-wrap: wrap;
     text-align: left;
-    align-items: center;
+    align-items: start;
     justify-content: center;
 }
 
@@ -369,10 +399,8 @@ nav ul li {
 }
 
 .quote-box>.profile {
-    max-height: 4rem;
-    max-width: 4rem;
-    border-radius: 4rem;
-    border: 1px solid var(--color);
+    font-size: 4rem;
+    color: var(--color);
 }
 
 @media (max-width: 600px) {
@@ -390,12 +418,14 @@ nav ul li {
 
 .quote-box .quote {
     font-family: 'Roboto Mono', monospace;
-    font-weight: 400;
+    font-weight: 600;
     margin: 0;
     font-size: 1.5rem;
-    border-radius: 0 1.2rem 1.2rem 1.2rem;
+    border-radius: 2rem;
     padding: 1rem;
-    border: 1px solid var(--color);
+    background-color: var(--color);
+    color: var(--primary);
+
 }
 
 @media (max-width: 600px) {
@@ -426,7 +456,7 @@ nav ul li {
 
 .summary {
     margin-top: 1rem;
-    padding: .6rem;
+    padding: .6rem .6rem .6rem 1.2rem;
     position: sticky;
     top: 0;
     --a-color: #ffffff88;
@@ -450,6 +480,10 @@ nav ul li {
 .summary ul li ul {
     padding-left: 1rem;
     font-size: .9rem;
+}
+
+.summary ul li ul li {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .summary a {
@@ -642,6 +676,7 @@ section>h2 {
 /* footer content */
 
 footer {
+    border-top: 1px solid rgba(0, 0, 0, .2);
     background-color: #00000030;
     --color: #FFFFFF80;
     color: var(--color);
@@ -719,4 +754,66 @@ a.button:active {
     position: relative;
     top: 3px;
     border-bottom-width: 1px;
+}
+
+
+/* common sizing */
+
+button {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    padding: .4rem;
+    border-radius: .4rem;
+    line-height: 1rem;
+}
+
+/* button */
+
+button {
+    --pop-color-hsl:210, 100%, 66%;
+    --opo-color-hsl:210, 100%, 10%;
+    font-weight: 600;
+    user-select: none;
+    border: none;
+    cursor: pointer;
+    --text-color: hsl(var(--opo-color-hsl));
+    color: var(--text-color);
+    background-color: hsla(var(--pop-color-hsl), 1);
+    position: relative;
+}
+
+button:focus, button:hover {
+    background-color: hsla(var(--pop-color-hsl), .8);
+}
+
+button:focus {
+    box-shadow: 0 0 0 .1rem hsla(var(--pop-color-hsl), 0.6);
+}
+
+button:active {
+    box-shadow: 0 0 0 .2rem hsla(var(--pop-color-hsl), 0.6);
+}
+
+button:focus-visible {
+    outline: .1rem solid var(--text-color);
+    outline-offset: -.2rem;
+}
+
+button.discreet, button.transparent {
+    --text-color: hsla(var(--pop-color-hsl), 1);
+    background-color: hsla(var(--pop-color-hsl), 0.2);
+}
+
+button.discreet:focus, button.discreet:hover {
+    text-decoration: none;
+    background-color: hsla(var(--pop-color-hsl), 0.1);
+}
+
+button.transparent {
+    background-color: transparent;
+}
+
+button.transparent:focus, button.transparent:hover {
+    text-decoration: none;
+    background-color: hsla(var(--pop-color-hsl), 0.1);
 }

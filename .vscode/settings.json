@@ -5,4 +5,7 @@
         "go"
     ],
     "cSpell.language": "en,fr",
+    "[html]": {
+        "editor.formatOnSave": false,
+    }
 }
