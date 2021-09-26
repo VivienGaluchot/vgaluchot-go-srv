@@ -48,7 +48,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+    - uses: google-github-actions/setup-gcloud@master
       with:
         service_account_key: ${{ secrets.GAE_SA_KEY }}
         project_id: vgaluchot
