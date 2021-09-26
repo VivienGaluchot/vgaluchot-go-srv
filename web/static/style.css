@@ -98,10 +98,10 @@ th, td {
 }
 
 hr {
-    background: lightgrey;
+    background: #00000030;
     border: 0;
     height: 1px;
-    margin: 2rem 0;
+    margin: 2rem;
 }
 
 /* main blocks */
@@ -124,10 +124,6 @@ body {
 }
 
 header {
-    --color: var(--primary-dark-text);
-    --background-color: var(--primary-dark);
-    color: var(--color);
-    /**/
     --color: var(--primary-text);
     --background-color: var(--primary);
     color: var(--color);
@@ -143,15 +139,11 @@ content {
 }
 
 footer {
-    --color: var(--primary-dark-text);
-    --background-color: var(--primary-dark);
+    --color: #FFFFFF80;
+    --background-color: #00000030;
     color: var(--color);
     background-color: var(--background-color);
-    /**/
-    --color: var(--primary-text);
-    --background-color: var(--primary);
-    color: var(--color);
-    background-color: var(--background-color);
+    border-top: 1px solid rgba(0, 0, 0, .2);
     /**/
     text-align: center;
     --a-color: var(--color);
@@ -186,7 +178,7 @@ content>.left {
 content>.right {
     border-left: 1px solid rgba(0, 0, 0, .2);
     border-right: 1px solid rgba(0, 0, 0, .2);
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 content>.main {
@@ -220,14 +212,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-    margin: 0;
-    padding: .3rem 0;
+    margin: .8rem 0;
     max-width: 66ch;
-}
-
-.p-spacer {
-    height: 1rem;
-    display: block;
 }
 
 b {
@@ -399,14 +385,13 @@ nav ul li {
 }
 
 .quote-box>.profile {
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: var(--color);
 }
 
 @media (max-width: 600px) {
     .quote-box>.profile {
-        max-height: 3rem;
-        max-width: 3rem;
+        font-size: 2.8rem;
     }
 }
 
@@ -421,16 +406,17 @@ nav ul li {
     font-weight: 600;
     margin: 0;
     font-size: 1.5rem;
+    line-height: 1;
     border-radius: 2rem;
     padding: 1rem;
     background-color: var(--color);
     color: var(--primary);
-
 }
 
 @media (max-width: 600px) {
     .quote-box .quote {
         font-size: 1.2rem;
+        padding: .8rem;
     }
 }
 
@@ -675,13 +661,6 @@ section>h2 {
 
 /* footer content */
 
-footer {
-    border-top: 1px solid rgba(0, 0, 0, .2);
-    background-color: #00000030;
-    --color: #FFFFFF80;
-    color: var(--color);
-}
-
 footer>* {
     margin: .4rem 0;
 }
@@ -756,7 +735,6 @@ a.button:active {
     border-bottom-width: 1px;
 }
 
-
 /* common sizing */
 
 button {
@@ -770,8 +748,8 @@ button {
 /* button */
 
 button {
-    --pop-color-hsl:210, 100%, 66%;
-    --opo-color-hsl:210, 100%, 10%;
+    --pop-color-hsl: 210, 100%, 66%;
+    --opo-color-hsl: 210, 100%, 10%;
     font-weight: 600;
     user-select: none;
     border: none;
